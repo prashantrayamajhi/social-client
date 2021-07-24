@@ -1,11 +1,5 @@
 import Axios from "./../api/server";
-import {
-  LOGIN,
-  SIGNUP,
-  LOGOUT,
-  FAILURE,
-  SUCCESS,
-} from "./../constants/actionTypes";
+import { LOGIN, SIGNUP, LOGOUT, FAILURE } from "./../constants/actionTypes";
 
 export const signup = (data) => async (dispatch) => {
   try {
@@ -23,13 +17,13 @@ export const login = (data) => async (dispatch) => {
     const res = await Axios.post("/api/v1/auth/login", data);
     if (res.status === 200) {
       dispatch({
-        type: SUCCESS,
+        type: LOGIN,
         payload: res.data.data,
       });
     }
-  } catch (err) {
+  } catch (error) {
     dispatch({ type: FAILURE, payload: error.response.data.err });
-    console.log(err);
+    console.log(error);
   }
 };
 
