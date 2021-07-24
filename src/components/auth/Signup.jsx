@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Axios from "./../../api/server";
+import { useDispatch } from "react-redux";
+import { signup } from "./../../actions/auth";
 import "./index.scss";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [err, setErr] = useState("");
 
   useEffect(() => {
     localStorage.getItem("id") &&
@@ -21,22 +21,19 @@ const Signup = () => {
       (window.location.href = "/");
   }, []);
 
+  const dispatch = useDispatch();
   const onFormSubmit = async (e) => {
     e.preventDefault();
     setIsDisabled(true);
-    try {
-      const data = { name, email, password, address };
-      const res = await Axios.post("/api/v1/auth/signup", data);
-      if (res.status === 201) {
-        window.location.href = "/auth/user/verify/" + res.data.data.email;
-        setIsDisabled(false);
-        setErr("");
-      }
-    } catch (err) {
-      console.log(err.response.data.err);
-      setErr(err.response.data.err);
-      setIsDisabled(false);
-    }
+    const data = { name, email, password, address, gender, username };
+    dispatch(signup(data));
+    setIsDisabled(false);
+    // const res = await Axios.post("/api/v1/auth/signup", data);
+    // if (res.status === 201) {
+    //   window.location.href = "/auth/user/verify/" + res.data.data.email;
+    //   setIsDisabled(false);
+    //   setErr("");
+    // }
   };
 
   return (
@@ -44,11 +41,6 @@ const Signup = () => {
       <div className="form-wrapper">
         <h2>Signup</h2>
         <form onSubmit={onFormSubmit}>
-          {err && (
-            <div className="err">
-              <p>{err}</p>
-            </div>
-          )}
           <div className="input-wrapper">
             <input
               type="text"
