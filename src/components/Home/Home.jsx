@@ -1,17 +1,32 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getPosts } from "./../../actions/posts";
+import { useEffect, useState } from "react";
+import { getPosts, createPost } from "./../../actions/posts";
 import Post from "./../Post/Post";
 import Navbar from "./../Navbar/Navbar";
 import "./index.scss";
 
 const Home = () => {
+  const [title, setTitle] = useState("");
+  const [anonymous, setAnonymous] = useState(false);
+
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const data = { title, anonymous };
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    dispatch(createPost(data, config));
+    setTitle("");
+  };
 
   return (
     <>
@@ -20,11 +35,26 @@ const Home = () => {
         <div className="posts">
           <div className="create">
             <h3>Create a post</h3>
-            <textarea placeholder="What on you mind ?"></textarea>
-            <button>Post</button>
+            <form onSubmit={handleFormSubmit}>
+              <textarea
+                placeholder="What on you mind ?"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              ></textarea>
+              <label htmlFor="anonymous">Anonymous</label>
+              <input
+                type="checkbox"
+                id="anonymous"
+                value={anonymous}
+                onChange={() => setAnonymous(!anonymous)}
+                style={{ marginLeft: "0.5rem" }}
+              />
+              <br />
+              <button type="submit">Post</button>
+            </form>
           </div>
-          {posts.posts &&
-            posts.posts.map((post, index) => {
+          {posts &&
+            posts.map((post, index) => {
               return <Post key={index} post={post} />;
             })}
         </div>

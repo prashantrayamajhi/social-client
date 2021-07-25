@@ -5,7 +5,7 @@ const Post = ({ post }) => {
     <div className="post">
       <div className="header">
         <div className="img-wrapper">
-          {post.anonymous ? (
+          {!post.anonymous ? (
             <>
               <img
                 src={
