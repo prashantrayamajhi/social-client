@@ -1,6 +1,10 @@
 import "./index.scss";
+import MaleImage from "./../../images/male.png";
+import FemaleImage from "./../../images/female.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 
-const Post = ({ post }) => {
+const Post = ({ post, isAuthor = false }) => {
   return (
     <div className="post">
       <div className="header">
@@ -11,7 +15,9 @@ const Post = ({ post }) => {
                 src={
                   post.user.image
                     ? post.user.image
-                    : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                    : post.user.gender === "male"
+                    ? MaleImage
+                    : FemaleImage
                 }
                 alt={post.user.name}
               />
@@ -27,6 +33,7 @@ const Post = ({ post }) => {
             </>
           )}
         </div>
+        {isAuthor && <FontAwesomeIcon icon={faEllipsisH} className="icon" />}
       </div>
       <div className="body">
         {post.image && (

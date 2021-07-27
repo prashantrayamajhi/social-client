@@ -4,6 +4,22 @@ import Axios from "./../../api/server";
 import config from "./../../helpers/config";
 import "./../../styles/Profile.scss";
 import Banner from "./Banner";
+import Post from "./../Post/Post";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMale,
+  faFemale,
+  faInfoCircle,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
+// images
+import Github from "./../../images/github.png";
+import Linkedin from "./../../images/linkedin.png";
+import Link from "./../../images/link.png";
+import Instagram from "./../../images/instagram.png";
+import Facebook from "./../../images/facebook.png";
+import Youtube from "./../../images/youtube.png";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -21,10 +37,88 @@ const Profile = () => {
 
   console.log(user);
   return (
-    <div>
+    <>
       <Navbar />
-      <Banner user={user} />
-    </div>
+      {user && (
+        <>
+          <Banner user={user} />
+          <div className="profile-container">
+            <div className="posts">
+              {user.posts.length > 0 ? (
+                user.posts
+                  .slice(0)
+                  .reverse()
+                  .map((post, index) => {
+                    return <Post key={index} post={post} isAuthor={true} />;
+                  })
+              ) : (
+                <div className="no-posts">
+                  <h3>No Posts Yet</h3>
+                </div>
+              )}
+            </div>
+            <div className="about">
+              <h4>About Me</h4>
+              {user.bio && (
+                <div className="info">
+                  <p>
+                    <FontAwesomeIcon icon={faInfoCircle} className="icon" />
+                    {user.bio}
+                  </p>
+                </div>
+              )}
+              <div className="info">
+                <p>
+                  <FontAwesomeIcon
+                    icon={user.gender === "male" ? faMale : faFemale}
+                    className="icon"
+                  />
+                  {user.gender}
+                </p>
+              </div>
+              <div className="info">
+                <p>
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
+                  {user.address}
+                </p>
+              </div>
+              <div className="info social">
+                {user.github && (
+                  <a href={user.github} target="_blank" rel="noreferrer">
+                    <img src={Github} alt="github" className="icon" />
+                  </a>
+                )}
+                {user.linkedin && (
+                  <a href={user.linkedin} target="_blank" rel="noreferrer">
+                    <img src={Linkedin} alt="linkedin" className="icon" />
+                  </a>
+                )}
+                {user.website && (
+                  <a href={user.website} target="_blank" rel="noreferrer">
+                    <img src={Link} alt="" className="icon" />
+                  </a>
+                )}
+                {user.instagram && (
+                  <a href={user.instagram} target="_blank" rel="noreferrer">
+                    <img src={Instagram} alt="" className="icon" />
+                  </a>
+                )}
+                {user.facebook && (
+                  <a href={user.facebook} target="_blank" rel="noreferrer">
+                    <img src={Facebook} alt="" className="icon" />
+                  </a>
+                )}
+                {user.youtube && (
+                  <a href={user.youtube} target="_blank" rel="noreferrer">
+                    <img src={Youtube} alt="" className="icon" />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
