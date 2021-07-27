@@ -18,6 +18,12 @@ const Navbar = () => {
         <Link to="/" className="nav-link">
           Home
         </Link>
+        <Link to="/profile" className="nav-link">
+          Profile
+        </Link>
+        <Link to="/settings" className="nav-link">
+          Settings
+        </Link>
         <p
           className="nav-link"
           onClick={() => {

@@ -1,0 +1,7 @@
+.profile-container {
+  width: 80%;
+  margin: 1rem auto;
+  @media (max-width: 800px) {
+    width: 95%;
+  }
+}

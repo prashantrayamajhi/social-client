@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getPosts, createPost } from "./../../actions/posts";
 import Post from "./../Post/Post";
 import Navbar from "./../Navbar/Navbar";
+import config from "./../../helpers/config";
 import "./index.scss";
 
 const Home = () => {
@@ -19,11 +20,6 @@ const Home = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const data = { title, anonymous };
-    const config = {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
     dispatch(createPost(data, config));
     setTitle("");
   };
