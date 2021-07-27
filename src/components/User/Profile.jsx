@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
-import Axios from "./../../api/server";
-import config from "./../../helpers/config";
 import "./../../styles/Profile.scss";
 import Banner from "./Banner";
 import Post from "./../Post/Post";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../../actions/profile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMale,
@@ -22,20 +22,14 @@ import Facebook from "./../../images/facebook.png";
 import Youtube from "./../../images/youtube.png";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.profile.user);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const res = await Axios.get(
-        "/api/v1/users/profile/" + localStorage.getItem("id"),
-        config
-      );
-      setUser(res.data.data);
-    };
-    fetchUser();
-  }, []);
+    dispatch(getUser());
+  }, [dispatch]);
 
-  console.log(user);
   return (
     <>
       <Navbar />

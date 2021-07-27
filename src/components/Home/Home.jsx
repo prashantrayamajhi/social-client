@@ -20,7 +20,6 @@ const Home = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const data = { title, anonymous };
-
     dispatch(createPost(data, config));
     setTitle("");
   };

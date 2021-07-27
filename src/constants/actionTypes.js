@@ -9,3 +9,4 @@ export const FAILURE = "FAILURE";
 export const CLEAR = "CLEAR";
 
 export const CREATE_POST = "CREATE_POST";
+export const GET_USER = "GET_USER";
