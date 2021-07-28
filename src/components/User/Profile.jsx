@@ -56,7 +56,19 @@ const Profile = () => {
           <div className="profile-container">
             {displayPage()}
             <div className="about">
-              <h4>About Me</h4>
+              <h4>
+                About Me{" "}
+                <span
+                  style={{
+                    fontSize: "1rem",
+                    marginLeft: "0.9rem",
+                    fontWeight: "400",
+                    color: "rgba(0,0,0,0.8)",
+                  }}
+                >
+                  <p>@{user.username}</p>
+                </span>
+              </h4>
               {user.bio && (
                 <div className="info">
                   <p>
