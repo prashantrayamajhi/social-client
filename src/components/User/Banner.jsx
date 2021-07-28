@@ -1,9 +1,9 @@
 import CoverImage from "./../../images/cover.jpg";
 import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
-import "./../../styles/Banner.scss";
+import "./../../css/Banner.scss";
 
-const Banner = ({ user }) => {
+const Banner = ({ user, setPage, page }) => {
   return (
     user && (
       <div className="banner">
@@ -24,14 +24,24 @@ const Banner = ({ user }) => {
             />
             <p>{user.name}</p>
           </div>
+
           <div className="stats">
-            <p>
+            <p
+              className={`item ${page === 1 && "active"}`}
+              onClick={() => setPage(1)}
+            >
               <span>{user.posts.length}</span> Posts
             </p>
-            <p>
+            <p
+              className={`item ${page === 2 && "active"}`}
+              onClick={() => setPage(2)}
+            >
               <span>{user.followers.length}</span> Followers
             </p>
-            <p>
+            <p
+              className={`item ${page === 3 && "active"}`}
+              onClick={() => setPage(3)}
+            >
               <span>{user.following.length}</span> Following
             </p>
           </div>

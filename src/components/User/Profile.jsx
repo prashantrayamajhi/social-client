@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
-import "./../../styles/Profile.scss";
+import "./../../css/Profile.scss";
 import Banner from "./Banner";
-import Post from "./../Post/Post";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../actions/profile";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +20,12 @@ import Instagram from "./../../images/instagram.png";
 import Facebook from "./../../images/facebook.png";
 import Youtube from "./../../images/youtube.png";
 
+import Posts from "./Posts";
+import Followers from "./Followers";
+import Following from "./Following";
+
 const Profile = () => {
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.profile.user);
@@ -30,27 +34,27 @@ const Profile = () => {
     dispatch(getUser());
   }, [dispatch]);
 
+  const displayPage = () => {
+    switch (page) {
+      case 1:
+        return <Posts user={user} />;
+      case 2:
+        return <Followers />;
+      case 3:
+        return <Following />;
+      default:
+        return <Posts user={user} />;
+    }
+  };
+
   return (
     <>
       <Navbar />
       {user && (
         <>
-          <Banner user={user} />
+          <Banner user={user} page={page} setPage={setPage} />
           <div className="profile-container">
-            <div className="posts">
-              {user.posts.length > 0 ? (
-                user.posts
-                  .slice(0)
-                  .reverse()
-                  .map((post, index) => {
-                    return <Post key={index} post={post} isAuthor={true} />;
-                  })
-              ) : (
-                <div className="no-posts">
-                  <h3>No Posts Yet</h3>
-                </div>
-              )}
-            </div>
+            {displayPage()}
             <div className="about">
               <h4>About Me</h4>
               {user.bio && (
