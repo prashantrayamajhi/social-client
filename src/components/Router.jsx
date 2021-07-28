@@ -6,7 +6,7 @@ import Signup from "./auth/Signup";
 import Verify from "./VerifyAccount/VerifyAccount";
 import Home from "./Home/Home";
 import Profile from "./User/Profile";
-import Settings from "./User/Settings";
+import Settings from "./User/Settings/Settings";
 
 // Private Route
 import PrivateRoute from "./PrivateRoute/PrivateRoute";

@@ -2,6 +2,9 @@ import CoverImage from "./../../images/cover.jpg";
 import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
 import "./../../css/Banner.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Banner = ({ user, setPage, page }) => {
   return (
@@ -22,7 +25,12 @@ const Banner = ({ user, setPage, page }) => {
               }
               alt={user.name}
             />
-            <p>{user.name}</p>
+            <p>
+              {user.name}{" "}
+              <Link to="/settings" className="icon">
+                <FontAwesomeIcon icon={faCog} />
+              </Link>
+            </p>
           </div>
 
           <div className="stats">
