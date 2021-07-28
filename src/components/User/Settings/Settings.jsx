@@ -23,13 +23,13 @@ const Settings = () => {
   const displaySetting = () => {
     switch (page) {
       case 1:
-        return <General />;
+        return <General user={user} />;
       case 2:
-        return <Profile />;
+        return <Profile user={user} />;
       case 3:
-        return <Account />;
+        return <Account user={user} />;
       default:
-        return <General />;
+        return <General user={user} />;
     }
   };
 
