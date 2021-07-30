@@ -1,13 +1,24 @@
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { updateGeneralSettings } from "./../../../actions/profile";
 
 const General = ({ user }) => {
+  const dispatch = useDispatch();
   const [name, setName] = useState(user.name);
   const [address, setAddress] = useState(user.address);
   const [gender, setGender] = useState(user.gender);
   const [dateOfBirth, setDateOfBirth] = useState(user.dateOfBirth);
+
+  const handleFormSubmit = async (e) => {
+    // profile/general/:id
+    e.preventDefault();
+    const data = { name, address, gender, dateOfBirth };
+    dispatch(updateGeneralSettings(data, user._id));
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className="input-wrapper">
           <label htmlFor="name">Full Name</label>
           <input
@@ -44,8 +55,11 @@ const General = ({ user }) => {
           <input
             type="date"
             id="date"
+            name="dateOfBirth"
             value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            onChange={(e) => {
+              setDateOfBirth(e.target.value);
+            }}
           />
         </div>
         <button type="submit">Update</button>

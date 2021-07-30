@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { updateProfileSettings } from "./../../../actions/profile";
 
 const Profile = ({ user }) => {
+  const dispatch = useDispatch();
   const [bio, setBio] = useState(user.bio);
   const [website, setWebsite] = useState(user.website);
   const [github, setGithub] = useState(user.github);
@@ -9,9 +12,24 @@ const Profile = ({ user }) => {
   const [facebook, setFacebook] = useState(user.facebook);
   const [youtube, setYoutube] = useState(user.youtube);
 
+  const handleFormSubmit = async (e) => {
+    // profile/general/:id
+    e.preventDefault();
+    const data = {
+      bio,
+      website,
+      github,
+      instagram,
+      linkedin,
+      facebook,
+      youtube,
+    };
+    dispatch(updateProfileSettings(data, user._id));
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <div className="input-wrapper">
           <label htmlFor="bio">Bio</label>
           <textarea
@@ -53,7 +71,7 @@ const Profile = ({ user }) => {
           />
         </div>
         <div className="input-wrapper">
-          <label htmlFor="linkedin">Linkedin`</label>
+          <label htmlFor="linkedin">Linkedin</label>
           <input
             type="text"
             id="linkedin"
