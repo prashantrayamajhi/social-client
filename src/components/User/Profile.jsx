@@ -10,6 +10,7 @@ import {
   faFemale,
   faInfoCircle,
   faMapMarkerAlt,
+  faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 // images
@@ -77,6 +78,15 @@ const Profile = () => {
                   </p>
                 </div>
               )}
+              {user.dateOfBirth && (
+                <div className="info">
+                  <p>
+                    <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
+                    {user.dateOfBirth}
+                  </p>
+                </div>
+              )}
+
               <div className="info">
                 <p>
                   <FontAwesomeIcon
