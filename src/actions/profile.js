@@ -3,11 +3,10 @@ import { checkJwtToken } from "../helpers/auth";
 import config from "../helpers/config";
 import Axios from "../api/server";
 
-export const getUser = () => async (dispatch) => {
+export const getUser = (id) => async (dispatch) => {
   checkJwtToken();
-  const id = localStorage.getItem("id");
   try {
-    const res = await Axios.get("/api/v1/users/profile/" + id, config);
+    const res = await Axios.get("/api/v1/users/profile/" + id);
     dispatch({
       type: GET_USER,
       payload: res.data.data,

@@ -1,6 +1,6 @@
 import { GET_USER } from "../constants/actionTypes";
 
-const initialState = { user: null, posts: [], followers: [], following: [] };
+const initialState = { user: null, posts: [] };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

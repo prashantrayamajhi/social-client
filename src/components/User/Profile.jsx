@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
+import { useParams } from "react-router-dom";
 import "./../../css/Profile.scss";
 import Banner from "./Banner";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,16 +25,27 @@ import Youtube from "./../../images/youtube.png";
 import Posts from "./Posts";
 import Followers from "./Followers";
 import Following from "./Following";
+import { checkJwtToken } from "../../helpers/auth";
 
 const Profile = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
+  const { id } = useParams();
 
   const user = useSelector((state) => state.profile.user);
 
   useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+    if (checkJwtToken()) {
+      if (id === localStorage.getItem("id")) {
+        setIsOwnProfile(true);
+      }
+    }
+  }, [id]);
+
+  useEffect(() => {
+    dispatch(getUser(id));
+  }, [dispatch, id]);
 
   const displayPage = () => {
     switch (page) {
@@ -53,7 +65,12 @@ const Profile = () => {
       <Navbar />
       {user && (
         <>
-          <Banner user={user} page={page} setPage={setPage} />
+          <Banner
+            user={user}
+            page={page}
+            setPage={setPage}
+            isOwnProfile={isOwnProfile}
+          />
           <div className="profile-container">
             {displayPage()}
             <div className="about">

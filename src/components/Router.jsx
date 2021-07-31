@@ -17,7 +17,7 @@ const RouterComponent = () => {
       <Router>
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
-          <PrivateRoute path="/profile" exact component={Profile} />
+          <PrivateRoute path="/profile/:id" exact component={Profile} />
           <PrivateRoute path="/settings" exact component={Settings} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={Signup} />

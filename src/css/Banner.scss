@@ -45,14 +45,18 @@
         margin-left: 1rem;
         margin-bottom: 1rem;
         cursor: pointer;
+        @media (max-width: 700px) {
+          margin: 0.5rem 0 0 0;
+          font-size: 1.2rem;
+        }
         .icon {
           color: #fff;
           font-size: 1.3rem;
           cursor: pointer;
           margin-left: 0.5rem;
-        }
-        @media (max-width: 700px) {
-          margin: 0;
+          @media (max-width: 700px) {
+            color: #000;
+          }
         }
       }
     }

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const Banner = ({ user, setPage, page }) => {
+const Banner = ({ user, setPage, page, isOwnProfile }) => {
   return (
     user && (
       <div className="banner">
@@ -27,9 +27,11 @@ const Banner = ({ user, setPage, page }) => {
             />
             <p>
               {user.name}{" "}
-              <Link to="/settings" className="icon">
-                <FontAwesomeIcon icon={faCog} />
-              </Link>
+              {isOwnProfile && (
+                <Link to="/settings" className="icon">
+                  <FontAwesomeIcon icon={faCog} />
+                </Link>
+              )}
             </p>
           </div>
 

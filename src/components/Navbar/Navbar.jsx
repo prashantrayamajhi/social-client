@@ -18,7 +18,10 @@ const Navbar = () => {
         <Link to="/" className="nav-link">
           Home
         </Link>
-        <Link to="/profile" className="nav-link">
+        <Link
+          to={`/profile/${localStorage.getItem("id")}`}
+          className="nav-link"
+        >
           Profile
         </Link>
         <Link to="/settings" className="nav-link">

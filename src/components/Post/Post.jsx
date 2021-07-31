@@ -3,6 +3,7 @@ import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Post = ({ post, isAuthor = false }) => {
   return (
@@ -11,7 +12,7 @@ const Post = ({ post, isAuthor = false }) => {
         <div className="header">
           <div className="img-wrapper">
             {!post.anonymous ? (
-              <>
+              <Link to={`/profile/${post.user._id}`} className="title">
                 <img
                   src={
                     post.user.image
@@ -23,7 +24,7 @@ const Post = ({ post, isAuthor = false }) => {
                   alt={post.user.name}
                 />
                 <p>{post.user.name}</p>
-              </>
+              </Link>
             ) : (
               <>
                 <img

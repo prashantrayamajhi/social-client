@@ -5,12 +5,17 @@ const checkJwtToken = () => {
   if (token) {
     const decoded = jwt_decode(token);
     const current_time = new Date().getTime() / 1000;
-    if (current_time > decoded.exp) {
+    if (
+      current_time > decoded.exp ||
+      decoded.id !== localStorage.getItem("id")
+    ) {
       logout();
+      return false;
     }
     return true;
   } else {
     logout();
+    return false;
   }
 };
 
@@ -27,7 +32,7 @@ const logout = () => {
   localStorage.removeItem("name");
   localStorage.removeItem("id");
   localStorage.removeItem("email");
-  window.location.href = "/login";
+  // window.location.href = "/login";
 };
 
 export { checkJwtToken, logout };

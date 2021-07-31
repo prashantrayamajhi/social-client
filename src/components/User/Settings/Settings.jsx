@@ -14,10 +14,16 @@ import Account from "./Account";
 const Settings = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const user = useSelector((state) => state.profile.user);
-
+  const user = useSelector((state) => {
+    if (
+      state.profile.user &&
+      state.profile.user._id === localStorage.getItem("id")
+    ) {
+      return state.profile.user;
+    }
+  });
   useEffect(() => {
-    dispatch(getUser());
+    dispatch(getUser(localStorage.getItem("id")));
   }, [dispatch]);
 
   const displaySetting = () => {
