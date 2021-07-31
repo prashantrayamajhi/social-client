@@ -11,29 +11,19 @@ const Post = ({ post, isAuthor = false }) => {
       <div className="post">
         <div className="header">
           <div className="img-wrapper">
-            {!post.anonymous ? (
-              <Link to={`/profile/${post.user._id}`} className="title">
-                <img
-                  src={
-                    post.user.image
-                      ? post.user.image
-                      : post.user.gender === "male"
-                      ? MaleImage
-                      : FemaleImage
-                  }
-                  alt={post.user.name}
-                />
-                <p>{post.user.name}</p>
-              </Link>
-            ) : (
-              <>
-                <img
-                  src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-                  alt="Anonymous"
-                />
-                <p>Anonymous</p>
-              </>
-            )}
+            <Link to={`/profile/${post.user._id}`} className="title">
+              <img
+                src={
+                  post.user.image
+                    ? post.user.image
+                    : post.user.gender === "male"
+                    ? MaleImage
+                    : FemaleImage
+                }
+                alt={post.user.name}
+              />
+              <p>{post.user.name}</p>
+            </Link>
           </div>
           {isAuthor && <FontAwesomeIcon icon={faEllipsisH} className="icon" />}
         </div>

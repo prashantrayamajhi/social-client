@@ -37,14 +37,6 @@ const Home = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></textarea>
-              <label htmlFor="anonymous">Anonymous</label>
-              <input
-                type="checkbox"
-                id="anonymous"
-                value={anonymous}
-                onChange={() => setAnonymous(!anonymous)}
-                style={{ marginLeft: "0.5rem" }}
-              />
               <br />
               <button type="submit">Post</button>
             </form>
