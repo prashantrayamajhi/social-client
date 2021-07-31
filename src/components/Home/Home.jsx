@@ -8,7 +8,6 @@ import "./index.scss";
 
 const Home = () => {
   const [title, setTitle] = useState("");
-  const [anonymous, setAnonymous] = useState(false);
 
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Home = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const data = { title, anonymous };
+    const data = { title };
     dispatch(createPost(data, config));
     setTitle("");
   };

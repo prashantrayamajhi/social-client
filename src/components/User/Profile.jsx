@@ -13,6 +13,7 @@ import {
   faMapMarkerAlt,
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import Moment from "react-moment";
 
 // images
 import Github from "./../../images/github.png";
@@ -99,7 +100,8 @@ const Profile = () => {
                 <div className="info">
                   <p>
                     <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
-                    {user.dateOfBirth}
+                    {console.log(user.dateOfBirth)}
+                    <Moment format="YYYY/MM/DD">{user.dateOfBirth}</Moment>
                   </p>
                 </div>
               )}
