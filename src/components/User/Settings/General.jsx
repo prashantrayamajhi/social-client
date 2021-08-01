@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { formatDate } from "./../../../helpers/date";
 import { updateGeneralSettings } from "./../../../actions/profile";
 
 const General = ({ user }) => {
@@ -8,6 +9,13 @@ const General = ({ user }) => {
   const [address, setAddress] = useState(user.address);
   const [gender, setGender] = useState(user.gender);
   const [dateOfBirth, setDateOfBirth] = useState(user.dateOfBirth);
+
+  useEffect(() => {
+    if (user.dateOfBirth) {
+      const formattedDate = formatDate(user.dateOfBirth);
+      setDateOfBirth(formattedDate);
+    }
+  }, [user.dateOfBirth]);
 
   const handleFormSubmit = async (e) => {
     // profile/general/:id
