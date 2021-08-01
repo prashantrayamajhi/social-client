@@ -17,12 +17,11 @@
         display: flex;
         align-items: center;
         text-decoration: none;
-
         img {
-          width: 1.8rem;
-          height: 1.8rem;
+          width: 2rem;
+          height: 2rem;
           border-radius: 50%;
-          object-fit: cover;
+          object-fit: contain;
         }
         p {
           margin-left: 0.6rem;

@@ -11,11 +11,14 @@
     text-align: center;
     padding: 2rem 1rem;
     padding-bottom: 1rem;
-    img {
-      width: 6rem;
-      height: 6rem;
-      border-radius: 50%;
-      object-fit: cover;
+    div {
+      margin: auto;
+      width: 8rem;
+      img {
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
     p {
       margin-top: 0.5rem;

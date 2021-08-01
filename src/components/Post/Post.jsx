@@ -22,6 +22,7 @@ const Post = ({ post, isAuthor = false }) => {
                 }
                 alt={post.user.name}
               />
+
               <p>{post.user.name}</p>
             </Link>
           </div>

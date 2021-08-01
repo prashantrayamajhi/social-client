@@ -16,16 +16,18 @@ const Banner = ({ user, setPage, page, isOwnProfile }) => {
         </div>
         <div className="details">
           <div className="profile">
-            <img
-              src={
-                user.image
-                  ? user.image
-                  : user.gender === "male"
-                  ? MaleImage
-                  : FemaleImage
-              }
-              alt={user.name}
-            />
+            <div>
+              <img
+                src={
+                  user.image
+                    ? user.image
+                    : user.gender === "male"
+                    ? MaleImage
+                    : FemaleImage
+                }
+                alt={user.name}
+              />
+            </div>
             <p className="action">{user.name}</p>
           </div>
 

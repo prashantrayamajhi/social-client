@@ -53,17 +53,18 @@ const Settings = () => {
       {user && (
         <div className="settings">
           <div className="header">
-            <img
-              src={
-                user.image
-                  ? user.image
-                  : user.gender === "male"
-                  ? MaleImage
-                  : FemaleImage
-              }
-              alt={user.name}
-            />
-
+            <div>
+              <img
+                src={
+                  user.image
+                    ? user.image
+                    : user.gender === "male"
+                    ? MaleImage
+                    : FemaleImage
+                }
+                alt={user.name}
+              />
+            </div>
             <form onSubmit={handleProfilePicture}>
               <input
                 type="file"
