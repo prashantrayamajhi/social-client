@@ -4,7 +4,7 @@ import "./../../../css/Settings.scss";
 import { useSelector, useDispatch } from "react-redux";
 import MaleImage from "./../../../images/male.png";
 import FemaleImage from "./../../../images/female.png";
-import { getUser } from "./../../../actions/profile";
+import { getUser, updateProfilePicture } from "./../../../actions/profile";
 
 // components
 import General from "./General";
@@ -14,6 +14,7 @@ import Account from "./Account";
 const Settings = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [image, setImage] = useState(null);
   const user = useSelector((state) => {
     if (
       state.profile.user &&
@@ -39,6 +40,13 @@ const Settings = () => {
     }
   };
 
+  const handleProfilePicture = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image);
+    dispatch(updateProfilePicture(formData, user._id));
+  };
+
   return (
     <div>
       <Navbar />
@@ -55,6 +63,17 @@ const Settings = () => {
               }
               alt={user.name}
             />
+
+            <form onSubmit={handleProfilePicture}>
+              <input
+                type="file"
+                name="image"
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                }}
+              />
+              <button type="submit">Submit</button>
+            </form>
             <p>{user.name}</p>
           </div>
           <div className="nav">

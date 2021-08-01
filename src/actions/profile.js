@@ -45,3 +45,27 @@ export const updateProfileSettings = (data, id) => async (dispatch) => {
     });
   }
 };
+
+export const updateProfilePicture = (data, id) => async (dispatch) => {
+  try {
+    const res = await Axios.patch(
+      "/api/v1/users/profile/picture/" + id,
+      data,
+      config
+    );
+    dispatch({
+      type: SUCCESS,
+      payload: "Profile picture updated",
+    });
+    dispatch({
+      type: GET_USER,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.err,
+    });
+  }
+};

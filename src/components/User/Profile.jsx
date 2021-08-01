@@ -100,7 +100,6 @@ const Profile = () => {
                 <div className="info">
                   <p>
                     <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
-                    {console.log(user.dateOfBirth)}
                     <Moment format="YYYY/MM/DD">{user.dateOfBirth}</Moment>
                   </p>
                 </div>
