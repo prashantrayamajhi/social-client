@@ -4,17 +4,18 @@ import "./../../../css/Settings.scss";
 import { useSelector, useDispatch } from "react-redux";
 import MaleImage from "./../../../images/male.png";
 import FemaleImage from "./../../../images/female.png";
-import { getUser, updateProfilePicture } from "./../../../actions/profile";
+import { getUser } from "./../../../actions/profile";
 
 // components
 import General from "./General";
 import Profile from "./Profile";
 import Account from "./Account";
+import ProfilePicture from "./ProfilePicture";
 
 const Settings = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const [image, setImage] = useState(null);
+
   const user = useSelector((state) => {
     if (
       state.profile.user &&
@@ -34,17 +35,12 @@ const Settings = () => {
       case 2:
         return <Profile user={user} />;
       case 3:
+        return <ProfilePicture user={user} />;
+      case 4:
         return <Account user={user} />;
       default:
         return <General user={user} />;
     }
-  };
-
-  const handleProfilePicture = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", image);
-    dispatch(updateProfilePicture(formData, user._id));
   };
 
   return (
@@ -65,16 +61,7 @@ const Settings = () => {
                 alt={user.name}
               />
             </div>
-            <form onSubmit={handleProfilePicture}>
-              <input
-                type="file"
-                name="image"
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                }}
-              />
-              <button type="submit">Submit</button>
-            </form>
+
             <p>{user.name}</p>
           </div>
           <div className="nav">
@@ -93,6 +80,12 @@ const Settings = () => {
             <p
               className={`item ${page === 3 && "active"}`}
               onClick={() => setPage(3)}
+            >
+              Image
+            </p>
+            <p
+              className={`item ${page === 4 && "active"}`}
+              onClick={() => setPage(4)}
             >
               Account
             </p>

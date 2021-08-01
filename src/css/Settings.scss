@@ -17,7 +17,7 @@
       img {
         width: 100%;
         border-radius: 50%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     p {
@@ -35,8 +35,12 @@
       cursor: pointer;
       font-size: 0.95rem;
       @media (max-width: 768px) {
-        padding: 0.3rem 1.4rem;
+        padding: 0.3rem 1rem;
         font-size: 0.9rem;
+      }
+      @media (max-width: 500px) {
+        padding: 0.3rem 0.9rem;
+        font-size: 0.85rem;
       }
     }
     .item.active {
