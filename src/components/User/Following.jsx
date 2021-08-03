@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { checkJwtToken } from "../../helpers/auth";
 
 import FollowCard from "./FollowCard";
+import About from "./About";
 import "./../../css/Follow.scss";
 import "./../../css/Profile.scss";
 
@@ -16,12 +17,8 @@ const Following = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.user);
   const following = useSelector((state) => state.follow.following);
-  const { id } = useParams();
 
-  useEffect(() => {
-    dispatch(getUser(id));
-    dispatch(getFollowingUsers(id));
-  }, [dispatch, id]);
+  const { id } = useParams();
 
   useEffect(() => {
     if (checkJwtToken()) {
@@ -30,6 +27,11 @@ const Following = () => {
       }
     }
   }, [id]);
+
+  useEffect(() => {
+    dispatch(getUser(id));
+    dispatch(getFollowingUsers(id));
+  }, [dispatch, id]);
 
   return (
     <>
@@ -46,6 +48,7 @@ const Following = () => {
                 </div>
               </div>
             </div>
+            <About id={id} />
           </div>
         </>
       )}

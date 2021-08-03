@@ -40,8 +40,7 @@ export const getFollowersUsers = (userId) => async (dispatch) => {
 export const followUser = (userId) => async (dispatch) => {
   const data = { userId };
   try {
-    const res = await Axios.post("/api/v1/users/follow", data, config);
-    console.log(res);
+    await Axios.post("/api/v1/users/follow", data, config);
     dispatch({
       type: SUCCESS,
       payload: "Followed user",

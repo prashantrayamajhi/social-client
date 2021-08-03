@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
     case GET_FOLLOWERS_USERS:
       return { ...state, followers: [...action.payload] };
     default:
-      return initialState;
+      return state;
   }
 };
 

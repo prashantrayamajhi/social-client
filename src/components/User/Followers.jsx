@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { checkJwtToken } from "../../helpers/auth";
 
 import FollowCard from "./FollowCard";
+import About from "./About";
 import "./../../css/Follow.scss";
 import "./../../css/Profile.scss";
 
@@ -19,17 +20,17 @@ const Followers = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getUser(id));
-    dispatch(getFollowersUsers(id));
-  }, [dispatch, id]);
-
-  useEffect(() => {
     if (checkJwtToken()) {
       if (id === localStorage.getItem("id")) {
         setIsOwnProfile(true);
       }
     }
   }, [id]);
+
+  useEffect(() => {
+    dispatch(getUser(id));
+    dispatch(getFollowersUsers(id));
+  }, [dispatch, id]);
 
   return (
     <>
@@ -42,10 +43,13 @@ const Followers = () => {
               <div className="follow">
                 <h3>Followers</h3>
                 <div className="list">
-                  <FollowCard isFollowing={false} followers={followers} />
+                  {followers && (
+                    <FollowCard isFollowing={false} followers={followers} />
+                  )}
                 </div>
               </div>
             </div>
+            <About id={id} />
           </div>
         </>
       )}
