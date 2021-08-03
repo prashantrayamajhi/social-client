@@ -32,14 +32,12 @@
         width: 100%;
         transform: translateX(-50%);
       }
-      div {
-        width: 8rem;
-        img {
-          width: 100%;
-          border-radius: 50%;
-          object-fit: cover;
-          cursor: pointer;
-        }
+      img {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 50%;
+        object-fit: contain;
+        cursor: pointer;
       }
       .action {
         font-size: 1.6rem;
