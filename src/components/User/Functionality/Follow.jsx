@@ -1,7 +1,17 @@
-const Follow = () => {
+import { followUser } from "./../../../actions/follow";
+import { useDispatch } from "react-redux";
+
+const Follow = ({ userId }) => {
+  const dispatch = useDispatch(0);
   return (
     <>
-      <button>Follow</button>
+      <button
+        onClick={() => {
+          dispatch(followUser(userId));
+        }}
+      >
+        Follow
+      </button>
     </>
   );
 };

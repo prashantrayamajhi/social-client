@@ -10,3 +10,7 @@ export const CLEAR = "CLEAR";
 
 export const CREATE_POST = "CREATE_POST";
 export const GET_USER = "GET_USER";
+
+export const FOLLOW_USER = "FOLLOW_USER";
+export const GET_FOLLOWING_USERS = "GET_FOLLOWING_USERS";
+export const GET_FOLLOWERS_USERS = "GET_FOLLOWERS_USERS";

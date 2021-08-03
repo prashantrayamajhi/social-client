@@ -24,12 +24,9 @@ import Facebook from "./../../images/facebook.png";
 import Youtube from "./../../images/youtube.png";
 
 import Posts from "./Posts";
-import Followers from "./Followers";
-import Following from "./Following";
 import { checkJwtToken } from "../../helpers/auth";
 
 const Profile = () => {
-  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const [isOwnProfile, setIsOwnProfile] = useState(false);
   const { id } = useParams();
@@ -48,32 +45,14 @@ const Profile = () => {
     dispatch(getUser(id));
   }, [dispatch, id]);
 
-  const displayPage = () => {
-    switch (page) {
-      case 1:
-        return <Posts user={user} />;
-      case 2:
-        return <Followers />;
-      case 3:
-        return <Following />;
-      default:
-        return <Posts user={user} />;
-    }
-  };
-
   return (
     <>
       <Navbar />
       {user && (
         <>
-          <Banner
-            user={user}
-            page={page}
-            setPage={setPage}
-            isOwnProfile={isOwnProfile}
-          />
+          <Banner user={user} isOwnProfile={isOwnProfile} />
           <div className="profile-container">
-            {displayPage()}
+            <Posts user={user} />
             <div className="about">
               <h4>
                 About Me{" "}

@@ -1,16 +1,55 @@
+import Banner from "./Banner";
+import Navbar from "../Navbar/Navbar";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "./../../actions/profile";
+import { getFollowersUsers } from "./../../actions/follow";
+import { useEffect, useState } from "react";
+import { checkJwtToken } from "../../helpers/auth";
+
 import FollowCard from "./FollowCard";
 import "./../../css/Follow.scss";
+import "./../../css/Profile.scss";
 
 const Followers = () => {
+  const [isOwnProfile, setIsOwnProfile] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.profile.user);
+  const followers = useSelector((state) => state.follow.followers);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getUser(id));
+    dispatch(getFollowersUsers(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (checkJwtToken()) {
+      if (id === localStorage.getItem("id")) {
+        setIsOwnProfile(true);
+      }
+    }
+  }, [id]);
+
   return (
-    <div className="left">
-      <div className="follow">
-        <h3>Followers</h3>
-        <div className="list">
-          <FollowCard following={false} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Navbar />
+      {user && (
+        <>
+          <Banner user={user} isOwnProfile={isOwnProfile} />
+          <div className="profile-container">
+            <div className="left">
+              <div className="follow">
+                <h3>Followers</h3>
+                <div className="list">
+                  <FollowCard isFollowing={false} followers={followers} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

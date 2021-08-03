@@ -7,7 +7,7 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Follow from "./Functionality/Follow";
 
-const Banner = ({ user, setPage, page, isOwnProfile }) => {
+const Banner = ({ user, isOwnProfile }) => {
   return (
     user && (
       <div className="banner">
@@ -33,24 +33,15 @@ const Banner = ({ user, setPage, page, isOwnProfile }) => {
 
           <div className="stats">
             <div className="list">
-              <p
-                className={`item ${page === 1 && "active"}`}
-                onClick={() => setPage(1)}
-              >
+              <Link to={`/profile/${user._id}`} className={"item"}>
                 <span>{user.posts.length}</span> Posts
-              </p>
-              <p
-                className={`item ${page === 2 && "active"}`}
-                onClick={() => setPage(2)}
-              >
+              </Link>
+              <Link to={`/followers/${user._id}`} className={"item"}>
                 <span>{user.followers.length}</span> Followers
-              </p>
-              <p
-                className={`item ${page === 3 && "active"}`}
-                onClick={() => setPage(3)}
-              >
+              </Link>
+              <Link to={`/following/${user._id}`} className={"item"}>
                 <span>{user.following.length}</span> Following
-              </p>
+              </Link>
             </div>
             <div className="actions">
               {isOwnProfile ? (
@@ -59,7 +50,7 @@ const Banner = ({ user, setPage, page, isOwnProfile }) => {
                   <FontAwesomeIcon icon={faCog} />
                 </Link>
               ) : (
-                <Follow />
+                <Follow userId={user._id} />
               )}
             </div>
           </div>
