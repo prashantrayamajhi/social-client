@@ -1,5 +1,3 @@
-import MaleImage from "./../../images/male.png";
-import FemaleImage from "./../../images/female.png";
 import Card from "./Card";
 
 const FollowCard = ({ isFollowing, followers, following }) => {
