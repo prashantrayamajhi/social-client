@@ -46,7 +46,22 @@ export const followUser = (userId) => async (dispatch) => {
       payload: "Followed user",
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.err,
+    });
+  }
+};
+
+export const unfollowUser = (userId) => async (dispatch) => {
+  const data = { userId };
+  try {
+    await Axios.post("/api/v1/users/unfollow", data, config);
+    dispatch({
+      type: SUCCESS,
+      payload: "Unfollowed user",
+    });
+  } catch (error) {
     dispatch({
       type: FAILURE,
       payload: error.response.data.err,

@@ -1,4 +1,9 @@
-import { GET_USER, SUCCESS, FAILURE } from "../constants/actionTypes";
+import {
+  GET_USER,
+  SUCCESS,
+  FAILURE,
+  GET_LOGGED_IN_USER,
+} from "../constants/actionTypes";
 import { checkJwtToken } from "../helpers/auth";
 import config from "../helpers/config";
 import Axios from "../api/server";
@@ -9,6 +14,21 @@ export const getUser = (id) => async (dispatch) => {
     const res = await Axios.get("/api/v1/users/profile/" + id);
     dispatch({
       type: GET_USER,
+      payload: res.data.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getLoggedInUser = () => async (dispatch) => {
+  checkJwtToken();
+  try {
+    const res = await Axios.get(
+      "/api/v1/users/profile/" + localStorage.getItem("id")
+    );
+    dispatch({
+      type: GET_LOGGED_IN_USER,
       payload: res.data.data,
     });
   } catch (err) {

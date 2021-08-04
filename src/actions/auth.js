@@ -24,9 +24,8 @@ export const login = (data) => async (dispatch) => {
         type: LOGIN,
         payload: res.data.data,
       });
-      window.location.href = "/";
     }
-    console.log(res.status);
+    window.location.href = "/";
   } catch (error) {
     if (error.response.data.err === "Please verify you account through mail") {
       window.location.href = "/verify/" + data.email;
