@@ -8,12 +8,14 @@ const General = ({ user }) => {
   const [name, setName] = useState(user.name);
   const [address, setAddress] = useState(user.address);
   const [gender, setGender] = useState(user.gender);
-  const [dateOfBirth, setDateOfBirth] = useState(user.dateOfBirth);
+  const [dateOfBirth, setDateOfBirth] = useState("");
 
   useEffect(() => {
     if (user.dateOfBirth) {
       const formattedDate = formatDate(user.dateOfBirth);
       setDateOfBirth(formattedDate);
+    } else {
+      setDateOfBirth("");
     }
   }, [user.dateOfBirth]);
 
