@@ -44,7 +44,11 @@ const Following = () => {
               <div className="follow">
                 <h3>Following</h3>
                 <div className="list">
-                  <FollowCard isFollowing={true} following={following} />
+                  <FollowCard
+                    isFollowing={true}
+                    following={following}
+                    id={id}
+                  />
                 </div>
               </div>
             </div>

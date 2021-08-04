@@ -1,11 +1,9 @@
 import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { followUser } from "./../../actions/follow";
+import Follow from "./Functionality/Follow";
 
-const Card = ({ profile, isFollowing }) => {
-  const dispatch = useDispatch();
+const Card = ({ profile }) => {
   return (
     <div className="card">
       <Link
@@ -25,14 +23,7 @@ const Card = ({ profile, isFollowing }) => {
         <p>{profile.name}</p>
         <p className="username">@{profile.username}</p>
       </Link>
-      <button
-        className={`${isFollowing && "following"}`}
-        onClick={() => {
-          dispatch(followUser(profile._id));
-        }}
-      >
-        {isFollowing ? "Following" : "Follow"}
-      </button>
+      <Follow user={profile} />
     </div>
   );
 };

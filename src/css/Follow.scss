@@ -35,22 +35,20 @@
         color: rgba(0, 0, 0, 0.8);
         margin-bottom: 1rem;
       }
+      button {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 0.3rem;
+        cursor: pointer;
+        background-color: #fff;
+        border: 1px solid black;
+      }
+      .following {
+        color: #fff;
+        background-color: #e00707;
+        border: none;
+      }
     }
   }
-}
-
-button {
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 0.3rem;
-  cursor: pointer;
-  background-color: #fff;
-  border: 1px solid black;
-}
-
-.following {
-  color: #fff;
-  background-color: #cf0000 !important;
-  border: none !important;
 }

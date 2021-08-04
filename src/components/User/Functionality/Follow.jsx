@@ -18,6 +18,11 @@ const Follow = ({ user }) => {
         {user.followers.includes(loggedInUser._id) ? (
           <button
             className="following"
+            style={{
+              color: "#fff",
+              backgroundColor: "#e00707",
+              border: "none",
+            }}
             onClick={() => {
               dispatch(unfollowUser(user._id));
             }}

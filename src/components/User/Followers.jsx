@@ -44,7 +44,11 @@ const Followers = () => {
                 <h3>Followers</h3>
                 <div className="list">
                   {followers && (
-                    <FollowCard isFollowing={false} followers={followers} />
+                    <FollowCard
+                      isFollowing={false}
+                      followers={followers}
+                      id={id}
+                    />
                   )}
                 </div>
               </div>
