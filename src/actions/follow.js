@@ -1,7 +1,7 @@
 import Axios from "./../api/server";
 import {
-  SUCCESS,
   FAILURE,
+  GET_USER,
   GET_FOLLOWERS_USERS,
   GET_FOLLOWING_USERS,
 } from "./../constants/actionTypes";
@@ -10,6 +10,7 @@ import config from "./../helpers/config";
 export const getFollowingUsers = (userId) => async (dispatch) => {
   try {
     const res = await Axios.get("/api/v1/users/following/" + userId, config);
+    console.log(res.data.data.following);
     dispatch({
       type: GET_FOLLOWING_USERS,
       payload: res.data.data.following,
@@ -40,12 +41,13 @@ export const getFollowersUsers = (userId) => async (dispatch) => {
 export const followUser = (userId) => async (dispatch) => {
   const data = { userId };
   try {
-    await Axios.post("/api/v1/users/follow", data, config);
+    const res = await Axios.post("/api/v1/users/follow", data, config);
     dispatch({
-      type: SUCCESS,
-      payload: "Followed user",
+      type: GET_USER,
+      payload: res.data.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: FAILURE,
       payload: error.response.data.err,
@@ -56,10 +58,10 @@ export const followUser = (userId) => async (dispatch) => {
 export const unfollowUser = (userId) => async (dispatch) => {
   const data = { userId };
   try {
-    await Axios.post("/api/v1/users/unfollow", data, config);
+    const res = await Axios.post("/api/v1/users/unfollow", data, config);
     dispatch({
-      type: SUCCESS,
-      payload: "Unfollowed user",
+      type: GET_USER,
+      payload: res.data.data,
     });
   } catch (error) {
     dispatch({

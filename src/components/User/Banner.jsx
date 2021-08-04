@@ -48,7 +48,7 @@ const Banner = ({ user, isOwnProfile }) => {
                   <FontAwesomeIcon icon={faCog} />
                 </Link>
               ) : (
-                <Follow userId={user._id} />
+                <Follow user={user} />
               )}
             </div>
           </div>
