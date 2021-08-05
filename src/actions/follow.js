@@ -38,10 +38,11 @@ export const getFollowersUsers = (userId) => async (dispatch) => {
   }
 };
 
-export const followUser = (userId) => async (dispatch) => {
+export const followUser = (userId, id) => async (dispatch) => {
   const data = { userId };
   try {
-    const res = await Axios.post("/api/v1/users/follow", data, config);
+    await Axios.post("/api/v1/users/follow", data, config);
+    const res = await Axios.get("/api/v1/users/profile/" + id);
     dispatch({
       type: GET_USER,
       payload: res.data.data,
@@ -55,14 +56,15 @@ export const followUser = (userId) => async (dispatch) => {
   }
 };
 
-export const unfollowUser = (userId) => async (dispatch) => {
+export const unfollowUser = (userId, id) => async (dispatch) => {
   const data = { userId };
   try {
-    const res = await Axios.post("/api/v1/users/unfollow", data, config);
-    dispatch({
-      type: GET_USER,
-      payload: res.data.data,
-    });
+    await Axios.post("/api/v1/users/unfollow", data, config);
+     const res = await Axios.get("/api/v1/users/profile/" + id);
+     dispatch({
+       type: GET_USER,
+       payload: res.data.data,
+     });
   } catch (error) {
     dispatch({
       type: FAILURE,

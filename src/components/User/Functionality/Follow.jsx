@@ -1,12 +1,15 @@
 import { followUser, unfollowUser } from "./../../../actions/follow";
 import { getLoggedInUser } from "./../../../actions/profile";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./../../../css/Follow.scss";
 
 const Follow = ({ user }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.profile.loggedInUser);
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getLoggedInUser());
@@ -24,7 +27,7 @@ const Follow = ({ user }) => {
               border: "none",
             }}
             onClick={() => {
-              dispatch(unfollowUser(user._id));
+              dispatch(unfollowUser(user._id, id));
             }}
           >
             Unfollow
@@ -32,7 +35,7 @@ const Follow = ({ user }) => {
         ) : (
           <button
             onClick={() => {
-              dispatch(followUser(user._id));
+              dispatch(followUser(user._id, id));
             }}
           >
             Follow
