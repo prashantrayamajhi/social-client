@@ -10,7 +10,6 @@ import config from "./../helpers/config";
 export const getFollowingUsers = (userId) => async (dispatch) => {
   try {
     const res = await Axios.get("/api/v1/users/following/" + userId, config);
-    console.log(res.data.data.following);
     dispatch({
       type: GET_FOLLOWING_USERS,
       payload: res.data.data.following,
@@ -43,6 +42,16 @@ export const followUser = (userId, id) => async (dispatch) => {
   try {
     await Axios.post("/api/v1/users/follow", data, config);
     const res = await Axios.get("/api/v1/users/profile/" + id);
+    const following = await Axios.get("/api/v1/users/following/" + id, config);
+    const followers = await Axios.get("/api/v1/users/followers/" + id, config);
+    dispatch({
+      type: GET_FOLLOWING_USERS,
+      payload: following.data.data.following,
+    });
+    dispatch({
+      type: GET_FOLLOWERS_USERS,
+      payload: followers.data.data.followers,
+    });
     dispatch({
       type: GET_USER,
       payload: res.data.data,
@@ -60,11 +69,21 @@ export const unfollowUser = (userId, id) => async (dispatch) => {
   const data = { userId };
   try {
     await Axios.post("/api/v1/users/unfollow", data, config);
-     const res = await Axios.get("/api/v1/users/profile/" + id);
-     dispatch({
-       type: GET_USER,
-       payload: res.data.data,
-     });
+    const res = await Axios.get("/api/v1/users/profile/" + id);
+    const following = await Axios.get("/api/v1/users/following/" + id, config);
+    const followers = await Axios.get("/api/v1/users/followers/" + id, config);
+    dispatch({
+      type: GET_FOLLOWING_USERS,
+      payload: following.data.data.following,
+    });
+    dispatch({
+      type: GET_FOLLOWERS_USERS,
+      payload: followers.data.data.followers,
+    });
+    dispatch({
+      type: GET_USER,
+      payload: res.data.data,
+    });
   } catch (error) {
     dispatch({
       type: FAILURE,
