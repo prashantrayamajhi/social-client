@@ -19,13 +19,7 @@ export const getPosts = () => async (dispatch) => {
 export const createPost = (data, config) => async (dispatch) => {
   try {
     const res = await Axios.post("/api/v1/posts", data, config);
-    if (res.status === 201) {
-      dispatch({
-        type: SUCCESS,
-        payload: "Post created",
-      });
-      dispatch({ type: CREATE_POST, payload: res.data.data });
-    }
+    dispatch({ type: CREATE_POST, payload: res.data.data });
   } catch (error) {
     dispatch({
       type: FAILURE,
@@ -37,12 +31,7 @@ export const createPost = (data, config) => async (dispatch) => {
 export const deletePost = (id) => async (dispatch) => {
   try {
     await Axios.delete("/api/v1/posts/" + id, config);
-    const res = await Axios.get("/api/v1/posts");
-    dispatch({ type: FETCH_ALL, payload: res.data.data });
-    dispatch({
-      type: SUCCESS,
-      payload: "Post deleted",
-    });
+    window.location.reload();
   } catch (error) {
     dispatch({
       type: FAILURE,
