@@ -21,16 +21,34 @@
       padding: 1.3rem 0.8rem 1.5rem;
     }
     .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       h3 {
         font-size: 1.5rem;
+      }
+      .delete {
         color: #ff2626;
       }
-      p {
-        margin-top: 0.8rem;
-        @media (max-width: 500px) {
-          font-size: 0.9rem;
-        }
+      .icon {
+        cursor: pointer;
+        font-size: 1.5rem;
       }
+    }
+    p {
+      margin-top: 0.8rem;
+      @media (max-width: 500px) {
+        font-size: 0.9rem;
+      }
+    }
+    textarea {
+      width: 100%;
+      height: 10rem;
+      margin-top: 1rem;
+      padding: 0.3rem 0.5rem;
+      font-size: 1rem;
+      outline: none;
+      border: 1px solid rgba(0, 0, 0, 0.5);
     }
     .btn-wrapper {
       display: flex;
@@ -58,6 +76,13 @@
         color: #ff2626;
         &:hover {
           background-color: #ff2626;
+          color: #fff;
+        }
+      }
+      .update {
+        border: 1px solid #000;
+        &:hover {
+          background-color: #000;
           color: #fff;
         }
       }

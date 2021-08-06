@@ -11,10 +11,23 @@ export const getPosts = () => async (dispatch) => {
   }
 };
 
-export const createPost = (data, config) => async (dispatch) => {
+export const createPost = (data) => async (dispatch) => {
   try {
     const res = await Axios.post("/api/v1/posts", data, config);
     dispatch({ type: CREATE_POST, payload: res.data.data });
+  } catch (error) {
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const updatePost = (title, id) => async (dispatch) => {
+  const data = { title };
+  try {
+    await Axios.patch("/api/v1/posts/" + id, data, config);
+    window.location.reload();
   } catch (error) {
     dispatch({
       type: FAILURE,

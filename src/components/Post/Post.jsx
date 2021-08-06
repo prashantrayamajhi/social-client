@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { checkJwtToken } from "./../../helpers/auth";
 import { useEffect, useState } from "react";
 import DeleteModal from "./../Modals/Delete";
+import EditModal from "./../Modals/Edit";
 
 const Post = ({ post }) => {
   const id = post.user._id;
@@ -16,6 +17,7 @@ const Post = ({ post }) => {
   const [isAuthor, setIsAuthor] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   useEffect(() => {
     checkJwtToken();
@@ -29,6 +31,13 @@ const Post = ({ post }) => {
       <>
         {deleteModal && (
           <DeleteModal id={post._id} setDeleteModal={setDeleteModal} />
+        )}
+        {editModal && (
+          <EditModal
+            id={post._id}
+            setEditModal={setEditModal}
+            postTitle={post.title ? post.title : ""}
+          />
         )}
         <div className="post">
           <div className="header">
@@ -60,6 +69,7 @@ const Post = ({ post }) => {
                     <p
                       onClick={() => {
                         setIsMenuOpen(false);
+                        setEditModal(true);
                       }}
                     >
                       Edit

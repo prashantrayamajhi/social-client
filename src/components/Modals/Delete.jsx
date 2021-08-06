@@ -15,9 +15,9 @@ const Delete = ({ id, setDeleteModal }) => {
     <div className="overlay">
       <div className="modal">
         <div className="title">
-          <h3>Delete !</h3>
-          <p>Are you sure you want to delete this post ?</p>
+          <h3 className="delete">Delete !</h3>
         </div>
+        <p>Are you sure you want to delete this post ?</p>
         <div className="btn-wrapper">
           <button
             className="cancel"
