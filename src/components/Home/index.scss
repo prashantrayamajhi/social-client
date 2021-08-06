@@ -23,6 +23,13 @@
         border-radius: 0.3rem;
         outline: none;
       }
+      input {
+        margin: 1rem 0;
+      }
+      .displayImage {
+        width: 100%;
+        cursor: pointer;
+      }
       button {
         margin-top: 1rem;
         border: none;

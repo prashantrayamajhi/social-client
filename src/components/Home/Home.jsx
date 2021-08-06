@@ -8,6 +8,8 @@ import "./index.scss";
 
 const Home = () => {
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState(null);
+  const [displayImage, setDisplayImage] = useState(null);
 
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
@@ -18,9 +20,13 @@ const Home = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const data = { title };
-    dispatch(createPost(data, config));
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("image", image);
+    dispatch(createPost(formData, config));
     setTitle("");
+    setImage(null);
+    setDisplayImage(null);
   };
 
   return (
@@ -36,6 +42,25 @@ const Home = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></textarea>
+              <input
+                type="file"
+                name="image"
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  setDisplayImage(URL.createObjectURL(e.target.files[0]));
+                }}
+              />
+              {displayImage && (
+                <img
+                  alt=""
+                  src={displayImage}
+                  className="displayImage"
+                  onClick={() => {
+                    setDisplayImage(null);
+                    setImage(null);
+                  }}
+                />
+              )}
               <br />
               <button type="submit">Post</button>
             </form>
