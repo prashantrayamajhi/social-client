@@ -41,7 +41,7 @@ const Home = () => {
             <h3>Create a post</h3>
             <form onSubmit={handleFormSubmit}>
               <textarea
-                placeholder="What on you mind ?"
+                placeholder="What's on you mind ?"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></textarea>
