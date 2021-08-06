@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import DeleteModal from "./../Modals/Delete";
 import EditModal from "./../Modals/Edit";
 
-const Post = ({ post }) => {
-  const id = post.user._id;
+const Post = ({ post, id }) => {
+  const profileId = id ? id : post.user._id;
   const userId = localStorage.getItem("id");
 
   const [isAuthor, setIsAuthor] = useState(false);
@@ -21,10 +21,10 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     checkJwtToken();
-    if (userId === id) {
+    if (userId === profileId) {
       setIsAuthor(true);
     }
-  }, [id, userId]);
+  }, [profileId, userId, post]);
 
   return (
     post && (

@@ -40,6 +40,7 @@ const Edit = ({ id, postTitle, setEditModal }) => {
             className="update"
             onClick={() => {
               dispatch(updatePost(title, id));
+              setEditModal(false);
             }}
           >
             Update

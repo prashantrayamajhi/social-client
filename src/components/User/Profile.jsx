@@ -36,7 +36,7 @@ const Profile = () => {
         <>
           <Banner user={user} isOwnProfile={isOwnProfile} />
           <div className="profile-container">
-            <Posts user={user} />
+            <Posts user={user} id={id} />
             <About id={id} />
           </div>
         </>

@@ -1,6 +1,6 @@
 import Post from "./../Post/Post";
 
-const Posts = ({ user }) => {
+const Posts = ({ user, id }) => {
   return (
     user && (
       <div className="left">
@@ -9,7 +9,7 @@ const Posts = ({ user }) => {
             .slice(0)
             .reverse()
             .map((post, index) => {
-              return <Post key={index} post={post} />;
+              return <Post key={index} post={post} id={id} />;
             })
         ) : (
           <div className="no-posts">
