@@ -65,10 +65,13 @@ const Home = () => {
               <button type="submit">Post</button>
             </form>
           </div>
-          {posts &&
+          {posts.length > 0 ? (
             posts.map((post, index) => {
               return <Post key={index} post={post} />;
-            })}
+            })
+          ) : (
+            <p className="loading">Loading...</p>
+          )}
         </div>
       </div>
     </>

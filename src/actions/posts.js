@@ -1,10 +1,5 @@
 import Axios from "./../api/server";
-import {
-  FETCH_ALL,
-  FAILURE,
-  SUCCESS,
-  CREATE_POST,
-} from "./../constants/actionTypes";
+import { FETCH_ALL, FAILURE, CREATE_POST } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
 export const getPosts = () => async (dispatch) => {
