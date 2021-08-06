@@ -9,7 +9,7 @@ const Posts = ({ user }) => {
             .slice(0)
             .reverse()
             .map((post, index) => {
-              return <Post key={index} post={post} isAuthor={true} />;
+              return <Post key={index} post={post} />;
             })
         ) : (
           <div className="no-posts">

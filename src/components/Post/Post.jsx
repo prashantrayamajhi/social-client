@@ -5,7 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const Post = ({ post, isAuthor = false }) => {
+import { checkJwtToken } from "./../../helpers/auth";
+import { useEffect, useState } from "react";
+
+const Post = ({ post }) => {
+  const id = post.user._id;
+  const userId = localStorage.getItem("id");
+
+  const [isAuthor, setIsAuthor] = useState(false);
+
+  useEffect(() => {
+    checkJwtToken();
+    if (userId === id) {
+      setIsAuthor(true);
+    }
+  }, [id, userId]);
   return (
     post && (
       <div className="post">
