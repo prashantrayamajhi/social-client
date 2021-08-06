@@ -7,12 +7,15 @@ import { Link } from "react-router-dom";
 
 import { checkJwtToken } from "./../../helpers/auth";
 import { useEffect, useState } from "react";
+import DeleteModal from "./../Modals/Delete";
 
 const Post = ({ post }) => {
   const id = post.user._id;
   const userId = localStorage.getItem("id");
 
   const [isAuthor, setIsAuthor] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   useEffect(() => {
     checkJwtToken();
@@ -20,48 +23,81 @@ const Post = ({ post }) => {
       setIsAuthor(true);
     }
   }, [id, userId]);
+
   return (
     post && (
-      <div className="post">
-        <div className="header">
-          <div className="img-wrapper">
-            <Link to={`/profile/${post.user._id}`} className="title">
-              <img
-                src={
-                  post.user.image
-                    ? post.user.image
-                    : post.user.gender === "male"
-                    ? MaleImage
-                    : FemaleImage
-                }
-                alt={post.user.name}
-              />
+      <>
+        {deleteModal && (
+          <DeleteModal id={post._id} setDeleteModal={setDeleteModal} />
+        )}
+        <div className="post">
+          <div className="header">
+            <div className="img-wrapper">
+              <Link to={`/profile/${post.user._id}`} className="title">
+                <img
+                  src={
+                    post.user.image
+                      ? post.user.image
+                      : post.user.gender === "male"
+                      ? MaleImage
+                      : FemaleImage
+                  }
+                  alt={post.user.name}
+                />
 
-              <p>{post.user.name}</p>
-            </Link>
+                <p>{post.user.name}</p>
+              </Link>
+            </div>
+            {isAuthor && (
+              <div className="author">
+                <FontAwesomeIcon
+                  icon={faEllipsisH}
+                  className="icon"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                />
+                {isMenuOpen && (
+                  <div className="menu">
+                    <p
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Edit
+                    </p>
+                    <p
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        setDeleteModal(true);
+                      }}
+                    >
+                      Delete
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-          {isAuthor && <FontAwesomeIcon icon={faEllipsisH} className="icon" />}
-        </div>
-        <div className="body">
-          {post.image && (
-            <div className="image-body">
-              {post.title && <p>{post.title}</p>}
-              <img src={post.image} alt={post?.title} />
-            </div>
-          )}
-          {!post.image && post.title && (
-            <div className="title-body">
-              <p>{post.title}</p>
-            </div>
-          )}
-        </div>
+          <div className="body">
+            {post.image && (
+              <div className="image-body">
+                {post.title && <p>{post.title}</p>}
+                <img src={post.image} alt={post?.title} />
+              </div>
+            )}
+            {!post.image && post.title && (
+              <div className="title-body">
+                <p>{post.title}</p>
+              </div>
+            )}
+          </div>
 
-        <div className="footer">
-          <p>Like</p>
-          <p>Comment</p>
-          <p>Report</p>
+          <div className="footer">
+            <p>Like</p>
+            <p>Comment</p>
+            <p>Report</p>
+          </div>
         </div>
-      </div>
+      </>
     )
   );
 };

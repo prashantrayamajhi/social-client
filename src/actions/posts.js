@@ -5,6 +5,7 @@ import {
   SUCCESS,
   CREATE_POST,
 } from "./../constants/actionTypes";
+import config from "./../helpers/config";
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -26,7 +27,23 @@ export const createPost = (data, config) => async (dispatch) => {
       dispatch({ type: CREATE_POST, payload: res.data.data });
     }
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    await Axios.delete("/api/v1/posts/" + id, config);
+    const res = await Axios.get("/api/v1/posts");
+    dispatch({ type: FETCH_ALL, payload: res.data.data });
+    dispatch({
+      type: SUCCESS,
+      payload: "Post deleted",
+    });
+  } catch (error) {
     dispatch({
       type: FAILURE,
       payload: error.response.data.error,

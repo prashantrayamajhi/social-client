@@ -1,0 +1,66 @@
+.overlay {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  z-index: 10;
+  .modal {
+    background-color: #fff;
+    padding: 1.3rem 1.5rem 2rem;
+    width: 30rem;
+    border-radius: 0.5rem;
+    @media (max-width: 500px) {
+      padding: 1.3rem 0.8rem 1.5rem;
+    }
+    .title {
+      h3 {
+        font-size: 1.5rem;
+        color: #ff2626;
+      }
+      p {
+        margin-top: 0.8rem;
+        @media (max-width: 500px) {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    .btn-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      button {
+        outline: none;
+        border: none;
+        font-size: 1rem;
+        padding: 0.4rem;
+        width: 100%;
+        cursor: pointer;
+        background-color: #fff;
+      }
+      .cancel {
+        margin-right: 1rem;
+        border: 1px solid #000;
+        &:hover {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+      .delete {
+        border: 1px solid #ff2626;
+        color: #ff2626;
+        &:hover {
+          background-color: #ff2626;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
