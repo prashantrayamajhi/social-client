@@ -4,13 +4,15 @@ import { updateProfileSettings } from "./../../../actions/profile";
 
 const Profile = ({ user }) => {
   const dispatch = useDispatch();
-  const [bio, setBio] = useState(user.bio);
-  const [website, setWebsite] = useState(user.website);
-  const [github, setGithub] = useState(user.github);
-  const [instagram, setInstagram] = useState(user.instagram);
-  const [linkedin, setLinkedin] = useState(user.linkedin);
-  const [facebook, setFacebook] = useState(user.facebook);
-  const [youtube, setYoutube] = useState(user.youtube);
+  const [bio, setBio] = useState(user.bio ? user.bio : "");
+  const [website, setWebsite] = useState(user.website ? user.website : "");
+  const [github, setGithub] = useState(user.github ? user.github : "");
+  const [instagram, setInstagram] = useState(
+    user.instagram ? user.instagram : ""
+  );
+  const [linkedin, setLinkedin] = useState(user.linkedin ? user.linkedin : "");
+  const [facebook, setFacebook] = useState(user.facebook ? user.facebook : "");
+  const [youtube, setYoutube] = useState(user.youtube ? user.youtube : "");
 
   const handleFormSubmit = async (e) => {
     // profile/general/:id
