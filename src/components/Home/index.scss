@@ -23,15 +23,24 @@
         border-radius: 0.3rem;
         outline: none;
       }
-      input {
-        margin: 1rem 0;
+      label {
+        display: block;
+        margin: 1rem 0 0rem;
+        border: 1px solid #000;
+        color: #000;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        text-align: center;
+        span {
+          margin-left: 0.5rem;
+        }
       }
       .displayImage {
         width: 100%;
         cursor: pointer;
+        margin: 1.5rem 0 1rem;
       }
       button {
-        margin-top: 1rem;
         border: none;
         outline: none;
         font-size: 1.1rem;

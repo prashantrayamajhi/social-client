@@ -6,6 +6,9 @@ import Navbar from "./../Navbar/Navbar";
 import config from "./../../helpers/config";
 import "./index.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+
 const Home = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
@@ -42,14 +45,20 @@ const Home = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></textarea>
-              <input
-                type="file"
-                name="image"
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  setDisplayImage(URL.createObjectURL(e.target.files[0]));
-                }}
-              />
+              <label htmlFor="file">
+                <FontAwesomeIcon icon={faUpload} className="upload" />
+                <span>Upload Image</span>
+                <input
+                  id="file"
+                  type="file"
+                  name="image"
+                  onChange={(e) => {
+                    setImage(e.target.files[0]);
+                    setDisplayImage(URL.createObjectURL(e.target.files[0]));
+                  }}
+                  hidden
+                />
+              </label>
               {displayImage && (
                 <img
                   alt=""
