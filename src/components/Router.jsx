@@ -19,14 +19,14 @@ const RouterComponent = () => {
     <>
       <Router>
         <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
           <PrivateRoute path="/" exact component={Home} />
           <PrivateRoute path="/:id" exact component={PostDetails} />
           <PrivateRoute path="/profile/:id" exact component={Profile} />
           <PrivateRoute path="/settings" exact component={Settings} />
           <PrivateRoute path="/followers/:id" exact component={Followers} />
           <PrivateRoute path="/following/:id" exact component={Following} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={Signup} />
           <Route path="/verify/:email" exact component={Verify} />
         </Switch>
       </Router>

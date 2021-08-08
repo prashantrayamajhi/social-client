@@ -28,12 +28,6 @@ const Signup = () => {
     const data = { name, email, password, address, gender, username };
     dispatch(signup(data));
     setIsDisabled(false);
-    // const res = await Axios.post("/api/v1/auth/signup", data);
-    // if (res.status === 201) {
-    //   window.location.href = "/auth/user/verify/" + res.data.data.email;
-    //   setIsDisabled(false);
-    //   setErr("");
-    // }
   };
 
   return (

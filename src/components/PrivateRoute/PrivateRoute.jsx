@@ -4,7 +4,7 @@ import { checkJwtToken } from "./../../helpers/auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <>
-    {!checkJwtToken() && <Redirect to={{ pathname: "/login" }} />}
+    {!checkJwtToken() && (window.location.href = "/login")}
     <Route
       {...rest}
       render={(props) =>
