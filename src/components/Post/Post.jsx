@@ -12,7 +12,7 @@ import EditModal from "./../Modals/Edit";
 import { useDispatch } from "react-redux";
 import { likePost } from "./../../actions/posts";
 
-const Post = ({ post }) => {
+const Post = ({ post, isSinglePost = false }) => {
   const userId = localStorage.getItem("id");
 
   const dispatch = useDispatch();
@@ -25,7 +25,11 @@ const Post = ({ post }) => {
     post && (
       <>
         {deleteModal && (
-          <DeleteModal id={post._id} setDeleteModal={setDeleteModal} />
+          <DeleteModal
+            id={post._id}
+            setDeleteModal={setDeleteModal}
+            isSinglePost={isSinglePost}
+          />
         )}
         {editModal && (
           <EditModal
@@ -82,7 +86,8 @@ const Post = ({ post }) => {
               </div>
             )}
           </div>
-          <div className="body">
+
+          <Link to={`/${post._id}`} className="body">
             {post.image && (
               <div className="image-body">
                 {post.title && <p>{post.title}</p>}
@@ -94,7 +99,7 @@ const Post = ({ post }) => {
                 <p>{post.title}</p>
               </div>
             )}
-          </div>
+          </Link>
 
           <div className="footer">
             <p
@@ -106,7 +111,9 @@ const Post = ({ post }) => {
               <FontAwesomeIcon icon={faThumbsUp} />
               <span>Like {post.likes.length}</span>
             </p>
-            <p>Comment</p>
+            <Link to={`/${post._id}`} className="comment">
+              {post.comments.length} Comments
+            </Link>
             <p>Report</p>
           </div>
         </div>

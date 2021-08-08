@@ -54,6 +54,8 @@
     }
   }
   .body {
+    color: #000;
+    text-decoration: none;
     .image-body {
       margin-bottom: -0.3rem !important;
       p {
@@ -102,6 +104,10 @@
     }
     .like.liked {
       color: #185adb;
+    }
+    .comment {
+      text-decoration: none;
+      color: #000;
     }
   }
 }

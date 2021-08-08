@@ -9,6 +9,7 @@ import Profile from "./User/Profile";
 import Followers from "./User/Followers";
 import Following from "./User/Following";
 import Settings from "./User/Settings/Settings";
+import PostDetails from "./Post/PostDetails";
 
 // Private Route
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
@@ -19,6 +20,7 @@ const RouterComponent = () => {
       <Router>
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
+          <PrivateRoute path="/:id" exact component={PostDetails} />
           <PrivateRoute path="/profile/:id" exact component={Profile} />
           <PrivateRoute path="/settings" exact component={Settings} />
           <PrivateRoute path="/followers/:id" exact component={Followers} />

@@ -57,13 +57,17 @@ export const updatePost = (title, id) => async (dispatch) => {
   }
 };
 
-export const deletePost = (id) => async (dispatch) => {
+export const deletePost = (id, isSinglePost) => async (dispatch) => {
   try {
     await Axios.delete("/api/v1/posts/" + id, config);
-    dispatch({
-      type: DELETE_POST,
-      payload: id,
-    });
+    if (isSinglePost) {
+      window.location.reload();
+    } else {
+      dispatch({
+        type: DELETE_POST,
+        payload: id,
+      });
+    }
   } catch (error) {
     dispatch({
       type: FAILURE,

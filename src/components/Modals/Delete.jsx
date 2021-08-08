@@ -3,11 +3,11 @@ import { deletePost } from "./../../actions/posts";
 
 import "./index.scss";
 
-const Delete = ({ id, setDeleteModal }) => {
+const Delete = ({ id, setDeleteModal, isSinglePost }) => {
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
-    dispatch(deletePost(id));
+    dispatch(deletePost(id, isSinglePost));
     setDeleteModal(false);
   };
 
