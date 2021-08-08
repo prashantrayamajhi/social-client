@@ -105,7 +105,7 @@ const Post = ({ post, isSinglePost = false }) => {
             <p
               className={`like ${post.likes.includes(userId) && "liked"}`}
               onClick={() => {
-                dispatch(likePost(post._id));
+                dispatch(likePost(post._id, isSinglePost));
               }}
             >
               <FontAwesomeIcon icon={faThumbsUp} />

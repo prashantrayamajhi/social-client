@@ -6,6 +6,7 @@ import {
   CREATE_POST,
   UPDATE_POST,
   LIKE_POST,
+  LIKE_SINGLE_POST,
   DELETE_POST,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
@@ -76,13 +77,20 @@ export const deletePost = (id, isSinglePost) => async (dispatch) => {
   }
 };
 
-export const likePost = (id) => async (dispatch) => {
+export const likePost = (id, isSinglePost) => async (dispatch) => {
   try {
     const res = await Axios.get("/api/v1/posts/like/" + id, config);
-    dispatch({
-      type: LIKE_POST,
-      payload: res.data.data,
-    });
+    if (isSinglePost) {
+      dispatch({
+        type: LIKE_SINGLE_POST,
+        payload: res.data.data,
+      });
+    } else {
+      dispatch({
+        type: LIKE_POST,
+        payload: res.data.data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: FAILURE,

@@ -12,6 +12,7 @@ export const GET_POST_BY_USER_ID = "GET_POST_BY_USER_ID";
 export const GET_POST_BY_ID = "GET_POST_BY_ID";
 export const CREATE_POST = "CREATE_POST";
 export const LIKE_POST = "LIKE_POST";
+export const LIKE_SINGLE_POST = "LIKE_SINGLE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
