@@ -6,6 +6,7 @@ import {
   CREATE_POST,
   UPDATE_POST,
   LIKE_POST,
+  DELETE_POST,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
@@ -59,7 +60,10 @@ export const updatePost = (title, id) => async (dispatch) => {
 export const deletePost = (id) => async (dispatch) => {
   try {
     await Axios.delete("/api/v1/posts/" + id, config);
-    window.location.reload();
+    dispatch({
+      type: DELETE_POST,
+      payload: id,
+    });
   } catch (error) {
     dispatch({
       type: FAILURE,

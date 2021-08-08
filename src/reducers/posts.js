@@ -4,7 +4,7 @@ import {
   UPDATE_POST,
   GET_POST_BY_USER_ID,
   LIKE_POST,
-  // DELETE_POST,
+  DELETE_POST,
 } from "./../constants/actionTypes";
 
 const reducers = (posts = [], action) => {
@@ -23,6 +23,9 @@ const reducers = (posts = [], action) => {
       return posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
+
+    case DELETE_POST:
+      return posts.filter((post) => post._id !== action.payload);
 
     default:
       return posts;
