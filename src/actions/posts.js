@@ -1,11 +1,26 @@
 import Axios from "./../api/server";
-import { FETCH_ALL, FAILURE, CREATE_POST } from "./../constants/actionTypes";
+import {
+  FETCH_ALL,
+  GET_POST_BY_USER_ID,
+  FAILURE,
+  CREATE_POST,
+  UPDATE_POST,
+} from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
 export const getPosts = () => async (dispatch) => {
   try {
     const res = await Axios.get("/api/v1/posts");
     dispatch({ type: FETCH_ALL, payload: res.data.data });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getPostsByUserId = (id) => async (dispatch) => {
+  try {
+    const res = await Axios.get("/api/v1/posts/userPosts/" + id);
+    dispatch({ type: GET_POST_BY_USER_ID, payload: res.data.data });
   } catch (err) {
     console.log(err);
   }
@@ -26,7 +41,11 @@ export const createPost = (data) => async (dispatch) => {
 export const updatePost = (title, id) => async (dispatch) => {
   const data = { title };
   try {
-    await Axios.patch("/api/v1/posts/" + id, data, config);
+    const res = await Axios.patch("/api/v1/posts/" + id, data, config);
+    dispatch({
+      type: UPDATE_POST,
+      payload: res.data.data,
+    });
     window.location.reload();
   } catch (error) {
     dispatch({

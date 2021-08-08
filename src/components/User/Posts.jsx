@@ -1,11 +1,21 @@
 import Post from "./../Post/Post";
+import { getPostsByUserId } from "./../../actions/posts";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const Posts = ({ user, id }) => {
+const Posts = ({ id }) => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    dispatch(getPostsByUserId(id));
+  }, [dispatch, id]);
+
   return (
-    user && (
+    posts && (
       <div className="left">
-        {user.posts.length > 0 ? (
-          user.posts
+        {posts.length > 0 ? (
+          posts
             .slice(0)
             .reverse()
             .map((post, index) => {
