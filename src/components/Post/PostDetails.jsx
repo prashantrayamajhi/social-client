@@ -33,7 +33,7 @@ const PostDetails = () => {
   return (
     <>
       <Navbar />
-      {post && post.user && (
+      {post && (
         <div className="container">
           <Post post={post} isSinglePost={true} />
           <div className="commentsWrapper">
@@ -55,13 +55,14 @@ const PostDetails = () => {
                 post.comments.map((comment, index) => {
                   return (
                     <div className="comment" key={index}>
+                      {console.log(comment)}
                       <img
                         src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
                         alt=""
                       />
                       <div className="details">
                         <div className="meta">
-                          <p>{post.user.name}</p>
+                          <p>{comment.user.name}</p>
                           <p>5:35 PM</p>
                         </div>
                         <div className="text">
