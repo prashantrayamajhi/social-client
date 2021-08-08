@@ -5,31 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-import { checkJwtToken } from "./../../helpers/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DeleteModal from "./../Modals/Delete";
 import EditModal from "./../Modals/Edit";
 
 import { useDispatch } from "react-redux";
 import { likePost } from "./../../actions/posts";
 
-const Post = ({ post, id }) => {
-  const profileId = id ? id : post.user._id;
+const Post = ({ post }) => {
   const userId = localStorage.getItem("id");
 
   const dispatch = useDispatch();
 
-  const [isAuthor, setIsAuthor] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-
-  useEffect(() => {
-    checkJwtToken();
-    if (userId === profileId) {
-      setIsAuthor(true);
-    }
-  }, [profileId, userId, post]);
 
   return (
     post && (
@@ -62,7 +52,7 @@ const Post = ({ post, id }) => {
                 <p>{post.user.name}</p>
               </Link>
             </div>
-            {isAuthor && (
+            {post.user._id === userId && (
               <div className="author">
                 <FontAwesomeIcon
                   icon={faEllipsisH}

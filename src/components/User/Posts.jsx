@@ -19,7 +19,7 @@ const Posts = ({ id }) => {
             .slice(0)
             .reverse()
             .map((post, index) => {
-              return <Post key={index} post={post} id={id} />;
+              return <Post key={index} post={post} />;
             })
         ) : (
           <div className="no-posts">
