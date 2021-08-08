@@ -16,6 +16,10 @@ export const LIKE_SINGLE_POST = "LIKE_SINGLE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
+export const CREATE_COMMENT = "CREATE_COMMENT";
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
 export const GET_USER = "GET_USER";
 export const GET_LOGGED_IN_USER = "GET_LOGGED_IN_USER";
 

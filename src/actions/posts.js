@@ -8,12 +8,15 @@ import {
   LIKE_POST,
   LIKE_SINGLE_POST,
   DELETE_POST,
+  CREATE_COMMENT,
+  UPDATE_COMMENT,
+  DELETE_COMMENT,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await Axios.get("/api/v1/posts");
+    const res = await Axios.get("/api/v1/posts", config);
     dispatch({ type: FETCH_ALL, payload: res.data.data });
   } catch (err) {
     console.log(err);
@@ -22,7 +25,7 @@ export const getPosts = () => async (dispatch) => {
 
 export const getPostsByUserId = (id) => async (dispatch) => {
   try {
-    const res = await Axios.get("/api/v1/posts/userPosts/" + id);
+    const res = await Axios.get("/api/v1/posts/userPosts/" + id, config);
     dispatch({ type: GET_POST_BY_USER_ID, payload: res.data.data });
   } catch (err) {
     console.log(err);

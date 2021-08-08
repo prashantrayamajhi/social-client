@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "./../../actions/post";
 
+import { postComment } from "./../../actions/post";
+
 import Post from "./Post";
 
 const PostDetails = () => {
@@ -23,12 +25,15 @@ const PostDetails = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const data = { postId: post._id, text };
+    dispatch(postComment(data));
+    setText("");
   };
 
   return (
     <>
       <Navbar />
-      {post && (
+      {post && post.user && (
         <div className="container">
           <Post post={post} isSinglePost={true} />
           <div className="commentsWrapper">
@@ -45,7 +50,28 @@ const PostDetails = () => {
                 <button>Submit</button>
               </div>
             </form>
-            <div className="comments"></div>
+            <div className="comments">
+              {post.comments.length > 0 &&
+                post.comments.map((comment, index) => {
+                  return (
+                    <div className="comment" key={index}>
+                      <img
+                        src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                        alt=""
+                      />
+                      <div className="details">
+                        <div className="meta">
+                          <p>{post.user.name}</p>
+                          <p>5:35 PM</p>
+                        </div>
+                        <div className="text">
+                          <p>{comment.comment}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
       )}

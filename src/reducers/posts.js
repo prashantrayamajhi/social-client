@@ -5,6 +5,9 @@ import {
   GET_POST_BY_USER_ID,
   LIKE_POST,
   DELETE_POST,
+  CREATE_COMMENT,
+  DELETE_COMMENT,
+  UPDATE_COMMENT,
 } from "./../constants/actionTypes";
 
 const reducers = (posts = [], action) => {
@@ -20,6 +23,7 @@ const reducers = (posts = [], action) => {
 
     case UPDATE_POST:
     case LIKE_POST:
+      // case CREATE_COMMENT:
       return posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
