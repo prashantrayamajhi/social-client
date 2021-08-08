@@ -5,6 +5,7 @@ import {
   FAILURE,
   CREATE_POST,
   UPDATE_POST,
+  LIKE_POST,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
@@ -59,6 +60,21 @@ export const deletePost = (id) => async (dispatch) => {
   try {
     await Axios.delete("/api/v1/posts/" + id, config);
     window.location.reload();
+  } catch (error) {
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const res = await Axios.get("/api/v1/posts/like/" + id, config);
+    dispatch({
+      type: LIKE_POST,
+      payload: res.data.data,
+    });
   } catch (error) {
     dispatch({
       type: FAILURE,

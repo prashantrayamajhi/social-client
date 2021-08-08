@@ -2,7 +2,7 @@ import "./index.scss";
 import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 import { checkJwtToken } from "./../../helpers/auth";
@@ -10,9 +10,14 @@ import { useEffect, useState } from "react";
 import DeleteModal from "./../Modals/Delete";
 import EditModal from "./../Modals/Edit";
 
+import { useDispatch } from "react-redux";
+import { likePost } from "./../../actions/posts";
+
 const Post = ({ post, id }) => {
   const profileId = id ? id : post.user._id;
   const userId = localStorage.getItem("id");
+
+  const dispatch = useDispatch();
 
   const [isAuthor, setIsAuthor] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -102,7 +107,15 @@ const Post = ({ post, id }) => {
           </div>
 
           <div className="footer">
-            <p>Like</p>
+            <p
+              className={`like ${post.likes.includes(userId) && "liked"}`}
+              onClick={() => {
+                dispatch(likePost(post._id));
+              }}
+            >
+              <FontAwesomeIcon icon={faThumbsUp} />
+              <span>Like {post.likes.length}</span>
+            </p>
             <p>Comment</p>
             <p>Report</p>
           </div>

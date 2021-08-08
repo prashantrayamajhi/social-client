@@ -10,6 +10,7 @@ export const CLEAR = "CLEAR";
 export const FETCH_ALL = "FETCH_ALL";
 export const GET_POST_BY_USER_ID = "GET_POST_BY_USER_ID";
 export const CREATE_POST = "CREATE_POST";
+export const LIKE_POST = "LIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
