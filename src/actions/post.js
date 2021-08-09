@@ -2,6 +2,7 @@ import {
   GET_POST_BY_ID,
   CREATE_COMMENT,
   // UPDATE_COMMENT,
+  DELETE_COMMENT,
   FAILURE,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
@@ -50,7 +51,11 @@ export const deleteComment = (postId, commentId, id) => async (dispatch) => {
       "/api/v1/posts/comment/" + postId + "/" + commentId + "/" + id,
       config
     );
-    window.location.reload();
+    const res = await Axios.get("/api/v1/posts/" + postId, config);
+    dispatch({
+      type: DELETE_COMMENT,
+      payload: res.data.data,
+    });
   } catch (error) {
     dispatch({
       type: FAILURE,
