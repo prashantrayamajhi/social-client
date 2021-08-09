@@ -8,9 +8,6 @@ import {
   LIKE_POST,
   LIKE_SINGLE_POST,
   DELETE_POST,
-  CREATE_COMMENT,
-  UPDATE_COMMENT,
-  DELETE_COMMENT,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 

@@ -1,6 +1,7 @@
 import {
   GET_POST_BY_ID,
   CREATE_COMMENT,
+  // UPDATE_COMMENT,
   FAILURE,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
@@ -25,6 +26,31 @@ export const postComment = (data) => async (dispatch) => {
       type: CREATE_COMMENT,
       payload: res.data.data,
     });
+  } catch (error) {
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const updateComment = (id) => async (dispatch) => {
+  try {
+  } catch (error) {
+    dispatch({
+      type: FAILURE,
+      payload: error.response.data.error,
+    });
+  }
+};
+
+export const deleteComment = (postId, commentId, id) => async (dispatch) => {
+  try {
+    await Axios.get(
+      "/api/v1/posts/comment/" + postId + "/" + commentId + "/" + id,
+      config
+    );
+    window.location.reload();
   } catch (error) {
     dispatch({
       type: FAILURE,

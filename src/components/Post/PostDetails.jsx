@@ -11,7 +11,7 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "./../../actions/post";
 
-import { postComment } from "./../../actions/post";
+import { postComment, deleteComment } from "./../../actions/post";
 
 import Post from "./Post";
 
@@ -19,6 +19,7 @@ const PostDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
+  const userId = localStorage.getItem("id");
 
   const [text, setText] = useState("");
 
@@ -57,33 +58,47 @@ const PostDetails = () => {
               {post.comments.length > 0 &&
                 post.comments.map((comment, index) => {
                   return (
-                    <div className="comment" key={index}>
-                      <Link to={`/profile/${comment.user._id}`}>
-                        <img
-                          src={
-                            comment.user.image
-                              ? comment.user.image
-                              : comment.user.gender === "male"
-                              ? MaleImage
-                              : FemaleImage
-                          }
-                          alt={post.user.name}
-                        />
-                      </Link>
-                      <div className="details">
-                        <div className="meta">
-                          <Link
-                            to={`/profile/${comment.user._id}`}
-                            className="name"
-                          >
-                            {comment.user.name}
-                          </Link>
-                          <p>
-                            <Moment fromNow>{comment.createdAt}</Moment>
-                          </p>
-                        </div>
-                        <div className="text">
-                          <p>{comment.comment}</p>
+                    <div key={index}>
+                      <div className="comment">
+                        <Link to={`/profile/${comment.user._id}`}>
+                          <img
+                            src={
+                              comment.user.image
+                                ? comment.user.image
+                                : comment.user.gender === "male"
+                                ? MaleImage
+                                : FemaleImage
+                            }
+                            alt={post.user.name}
+                          />
+                        </Link>
+                        <div className="details">
+                          <div className="meta">
+                            <Link
+                              to={`/profile/${comment.user._id}`}
+                              className="name"
+                            >
+                              {comment.user.name}
+                            </Link>
+                            <p>
+                              <Moment fromNow>{comment.createdAt}</Moment>
+                            </p>
+                          </div>
+                          <div className="text">
+                            <p>{comment.comment}</p>
+                            {comment.user._id === userId && (
+                              <div
+                                className="actions"
+                                onClick={() => {
+                                  dispatch(
+                                    deleteComment(post._id, comment._id, userId)
+                                  );
+                                }}
+                              >
+                                <p>Delete</p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>

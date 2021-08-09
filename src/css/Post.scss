@@ -36,8 +36,8 @@
       }
     }
     .comments {
-      margin-top: 2.5rem;
       .comment {
+        margin-top: 2.5rem;
         display: flex;
         align-items: flex-start;
         margin: 1rem 0;
@@ -100,6 +100,22 @@
               word-wrap: break-word;
               @media (max-width: 500px) {
                 font-size: 0.8rem;
+              }
+            }
+            .actions {
+              cursor: pointer;
+              text-align: end;
+              margin-top: 1rem;
+              p {
+                font-size: 0.9rem;
+                display: inline-block;
+                background-color: #fa1e0e;
+                padding: 0.2rem 2rem 0.3rem;
+                color: #fff;
+                @media (max-width: 768px) {
+                  padding: 0.3rem 2rem;
+                  font-size: 0.8rem;
+                }
               }
             }
           }

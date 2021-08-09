@@ -5,9 +5,9 @@ import {
   GET_POST_BY_USER_ID,
   LIKE_POST,
   DELETE_POST,
-  CREATE_COMMENT,
-  DELETE_COMMENT,
-  UPDATE_COMMENT,
+  // CREATE_COMMENT,
+  // DELETE_COMMENT,
+  // UPDATE_COMMENT,
 } from "./../constants/actionTypes";
 
 const reducers = (posts = [], action) => {
