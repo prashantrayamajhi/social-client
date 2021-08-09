@@ -1,6 +1,8 @@
 import Navbar from "./../Navbar/Navbar";
 import "./../../css/Post.scss";
 import "./index.scss";
+import MaleImage from "./../../images/male.png";
+import FemaleImage from "./../../images/female.png";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -55,10 +57,15 @@ const PostDetails = () => {
                 post.comments.map((comment, index) => {
                   return (
                     <div className="comment" key={index}>
-                      {console.log(comment)}
                       <img
-                        src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-                        alt=""
+                        src={
+                          comment.user.image
+                            ? comment.user.image
+                            : comment.user.gender === "male"
+                            ? MaleImage
+                            : FemaleImage
+                        }
+                        alt={post.user.name}
                       />
                       <div className="details">
                         <div className="meta">
