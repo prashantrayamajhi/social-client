@@ -11,7 +11,7 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "./../../actions/post";
 
-import { postComment, deleteComment } from "./../../actions/post";
+import { postComment } from "./../../actions/post";
 import DeleteModal from "./../Modals/DeleteComment";
 
 import Post from "./Post";
