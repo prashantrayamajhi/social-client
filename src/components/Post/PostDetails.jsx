@@ -5,7 +5,7 @@ import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "./../../actions/post";
@@ -57,19 +57,26 @@ const PostDetails = () => {
                 post.comments.map((comment, index) => {
                   return (
                     <div className="comment" key={index}>
-                      <img
-                        src={
-                          comment.user.image
-                            ? comment.user.image
-                            : comment.user.gender === "male"
-                            ? MaleImage
-                            : FemaleImage
-                        }
-                        alt={post.user.name}
-                      />
+                      <Link to={`/profile/${comment.user._id}`}>
+                        <img
+                          src={
+                            comment.user.image
+                              ? comment.user.image
+                              : comment.user.gender === "male"
+                              ? MaleImage
+                              : FemaleImage
+                          }
+                          alt={post.user.name}
+                        />
+                      </Link>
                       <div className="details">
                         <div className="meta">
-                          <p>{comment.user.name}</p>
+                          <Link
+                            to={`/profile/${comment.user._id}`}
+                            className="name"
+                          >
+                            {comment.user.name}
+                          </Link>
                           <p>5:35 PM</p>
                         </div>
                         <div className="text">
