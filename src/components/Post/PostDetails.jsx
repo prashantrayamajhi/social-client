@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "./../../actions/post";
 
 import { postComment, deleteComment } from "./../../actions/post";
+import DeleteModal from "./../Modals/DeleteComment";
 
 import Post from "./Post";
 
@@ -20,6 +21,10 @@ const PostDetails = () => {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
   const userId = localStorage.getItem("id");
+
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [postId, setPostId] = useState(null);
+  const [commentId, setCommentId] = useState(null);
 
   const [text, setText] = useState("");
 
@@ -36,6 +41,14 @@ const PostDetails = () => {
 
   return (
     <>
+      {deleteModal && (
+        <DeleteModal
+          id={userId}
+          postId={postId}
+          commentId={commentId}
+          setDeleteModal={setDeleteModal}
+        />
+      )}
       <Navbar />
       {post && (
         <div className="container">
@@ -90,9 +103,9 @@ const PostDetails = () => {
                               <div
                                 className="actions"
                                 onClick={() => {
-                                  dispatch(
-                                    deleteComment(post._id, comment._id, userId)
-                                  );
+                                  setPostId(post._id);
+                                  setCommentId(comment._id);
+                                  setDeleteModal(true);
                                 }}
                               >
                                 <p>Delete</p>
