@@ -3,6 +3,7 @@ import "./../../css/Post.scss";
 import "./index.scss";
 import MaleImage from "./../../images/male.png";
 import FemaleImage from "./../../images/female.png";
+import Moment from "react-moment";
 
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -77,7 +78,10 @@ const PostDetails = () => {
                           >
                             {comment.user.name}
                           </Link>
-                          <p>5:35 PM</p>
+                          <p>
+                            {/* <Moment format="hh:mm">{comment.createdAt}</Moment> */}
+                            <Moment fromNow>{comment.createdAt}</Moment>
+                          </p>
                         </div>
                         <div className="text">
                           <p>{comment.comment}</p>
