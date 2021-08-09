@@ -79,7 +79,6 @@ const PostDetails = () => {
                             {comment.user.name}
                           </Link>
                           <p>
-                            {/* <Moment format="hh:mm">{comment.createdAt}</Moment> */}
                             <Moment fromNow>{comment.createdAt}</Moment>
                           </p>
                         </div>
