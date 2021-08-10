@@ -16,7 +16,7 @@ const reducers = (state = initialState, action) => {
       return { ...state, posts: action.payload.posts };
 
     case GET_POST_BY_USER_ID:
-      return { ...state, posts: [action.payload] };
+      return { ...state, posts: action.payload };
 
     case CREATE_POST:
       return { ...state, loading: true };

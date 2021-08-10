@@ -85,6 +85,7 @@ const Home = () => {
               )}
             </form>
           </div>
+
           {posts.length > 0 ? (
             posts.map((post, index) => {
               return <Post key={index} post={post} />;

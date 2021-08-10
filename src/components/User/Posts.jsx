@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Posts = ({ id }) => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.posts);
 
   useEffect(() => {
     dispatch(getPostsByUserId(id));
