@@ -12,6 +12,7 @@ const Signup = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const loading = useSelector((state) => state.auth.loading);
 
@@ -26,7 +27,15 @@ const Signup = () => {
   const dispatch = useDispatch();
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    const data = { name, email, password, address, gender, username };
+    const data = {
+      name,
+      email,
+      password,
+      address,
+      gender,
+      username,
+      confirmPassword,
+    };
     dispatch(signup(data));
   };
 
@@ -93,6 +102,16 @@ const Signup = () => {
               placeholder="Create a password"
               onChange={(e) => {
                 setPassword(e.target.value);
+              }}
+            />
+          </div>
+          <div className="input-wrapper">
+            <input
+              type="password"
+              value={confirmPassword}
+              placeholder="Repeat the password"
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
               }}
             />
           </div>
