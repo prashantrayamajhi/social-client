@@ -1,5 +1,6 @@
 import Axios from "./../api/server";
 import {
+  GET_ALL,
   FETCH_ALL,
   GET_POST_BY_USER_ID,
   FAILURE,
@@ -14,15 +15,21 @@ import {
 import config from "./../helpers/config";
 
 export const getPosts = () => async (dispatch) => {
+  dispatch({
+    type: FETCH_ALL,
+  });
   try {
     const res = await Axios.get("/api/v1/posts", config);
-    dispatch({ type: FETCH_ALL, payload: res.data.data });
+    dispatch({ type: GET_ALL, payload: res.data.data });
   } catch (err) {
     console.log(err);
   }
 };
 
 export const getPostsByUserId = (id) => async (dispatch) => {
+  dispatch({
+    type: FETCH_ALL,
+  });
   try {
     const res = await Axios.get("/api/v1/posts/userPosts/" + id, config);
     dispatch({ type: GET_POST_BY_USER_ID, payload: res.data.data });

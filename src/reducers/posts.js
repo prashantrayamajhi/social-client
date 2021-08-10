@@ -1,4 +1,5 @@
 import {
+  GET_ALL,
   FETCH_ALL,
   CREATE_POST,
   UPDATE_POST,
@@ -12,11 +13,14 @@ import {
 const initialState = { posts: [], loading: false };
 const reducers = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL:
+      return { ...state, posts: action.payload.posts, loading: false };
+
     case FETCH_ALL:
-      return { ...state, posts: action.payload.posts };
+      return { ...state, loading: true };
 
     case GET_POST_BY_USER_ID:
-      return { ...state, posts: action.payload };
+      return { ...state, posts: action.payload, loading: false };
 
     case CREATE_POST:
       return { ...state, loading: true };

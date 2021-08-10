@@ -12,6 +12,7 @@ export const FAILURE = "FAILURE";
 export const CLEAR = "CLEAR";
 
 export const FETCH_ALL = "FETCH_ALL";
+export const GET_ALL = "GET_ALL";
 export const GET_POST_BY_USER_ID = "GET_POST_BY_USER_ID";
 export const GET_POST_BY_ID = "GET_POST_BY_ID";
 export const FETCH_POST = "FETCH_POST";
