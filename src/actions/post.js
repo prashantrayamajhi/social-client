@@ -4,11 +4,15 @@ import {
   // UPDATE_COMMENT,
   DELETE_COMMENT,
   FAILURE,
+  FETCH_POST,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 import Axios from "./../api/server";
 
 export const getPostById = (id) => async (dispatch) => {
+  dispatch({
+    type: FETCH_POST,
+  });
   try {
     const res = await Axios.get("/api/v1/posts/" + id, config);
     dispatch({

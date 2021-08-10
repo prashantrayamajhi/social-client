@@ -6,6 +6,7 @@ import { getUser } from "./../../actions/profile";
 import { getFollowingUsers } from "./../../actions/follow";
 import { useEffect, useState } from "react";
 import { checkJwtToken } from "../../helpers/auth";
+import Loading from "./../Utility/Loading";
 
 import FollowCard from "./FollowCard";
 import About from "./About";
@@ -17,6 +18,7 @@ const Following = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.user);
   const following = useSelector((state) => state.follow.following);
+  const loading = useSelector((state) => state.follow.loading);
 
   const { id } = useParams();
 
@@ -44,11 +46,15 @@ const Following = () => {
               <div className="follow">
                 <h3>Following</h3>
                 <div className="list">
-                  <FollowCard
-                    isFollowing={true}
-                    following={following}
-                    id={id}
-                  />
+                  {loading ? (
+                    <Loading />
+                  ) : (
+                    <FollowCard
+                      isFollowing={true}
+                      following={following}
+                      id={id}
+                    />
+                  )}
                 </div>
               </div>
             </div>

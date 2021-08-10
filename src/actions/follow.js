@@ -4,10 +4,15 @@ import {
   GET_USER,
   GET_FOLLOWERS_USERS,
   GET_FOLLOWING_USERS,
+  FETCH_FOLLOWERS_USERS,
+  FETCH_FOLLOWING_USERS,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
 export const getFollowingUsers = (userId) => async (dispatch) => {
+  dispatch({
+    type: FETCH_FOLLOWING_USERS,
+  });
   try {
     const res = await Axios.get("/api/v1/users/following/" + userId, config);
     dispatch({
@@ -23,6 +28,9 @@ export const getFollowingUsers = (userId) => async (dispatch) => {
 };
 
 export const getFollowersUsers = (userId) => async (dispatch) => {
+  dispatch({
+    type: FETCH_FOLLOWERS_USERS,
+  });
   try {
     const res = await Axios.get("/api/v1/users/followers/" + userId, config);
     dispatch({

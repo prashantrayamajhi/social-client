@@ -6,6 +6,7 @@ import { getUser } from "./../../actions/profile";
 import { getFollowersUsers } from "./../../actions/follow";
 import { useEffect, useState } from "react";
 import { checkJwtToken } from "../../helpers/auth";
+import Loading from "./../Utility/Loading";
 
 import FollowCard from "./FollowCard";
 import About from "./About";
@@ -17,6 +18,7 @@ const Followers = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.user);
   const followers = useSelector((state) => state.follow.followers);
+  const loading = useSelector((state) => state.follow.loading);
   const { id } = useParams();
 
   useEffect(() => {
@@ -31,7 +33,6 @@ const Followers = () => {
     dispatch(getUser(id));
     dispatch(getFollowersUsers(id));
   }, [dispatch, id]);
-
   return (
     <>
       <Navbar />
@@ -43,7 +44,9 @@ const Followers = () => {
               <div className="follow">
                 <h3>Followers</h3>
                 <div className="list">
-                  {followers && (
+                  {loading ? (
+                    <Loading />
+                  ) : (
                     <FollowCard
                       isFollowing={false}
                       followers={followers}
