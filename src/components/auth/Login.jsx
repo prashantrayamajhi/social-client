@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "./../../actions/auth";
 import "./index.scss";
+import Loading from "./../Utility/Loading";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -66,6 +67,7 @@ const Login = () => {
             <button type="submit" disabled={isDisabled}>
               Login
             </button>
+            {/* <Loading /> */}
           </div>
           <p>
             Dont have an account ?{" "}
