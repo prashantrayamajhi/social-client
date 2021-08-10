@@ -42,10 +42,10 @@ const Login = () => {
         <form onSubmit={onFormSubmit}>
           <div className="input-wrapper">
             <input
-              type="email"
+              type="text"
               value={email}
               autoFocus
-              placeholder="Enter your email address"
+              placeholder="Enter your email address or username"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
