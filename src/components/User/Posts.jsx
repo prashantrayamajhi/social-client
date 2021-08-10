@@ -15,12 +15,9 @@ const Posts = ({ id }) => {
     posts && (
       <div className="left">
         {posts.length > 0 ? (
-          posts
-            .slice(0)
-            .reverse()
-            .map((post, index) => {
-              return <Post key={index} post={post} />;
-            })
+          posts.map((post, index) => {
+            return <Post key={index} post={post} />;
+          })
         ) : (
           <div className="no-posts">
             <h3>No Posts Yet</h3>
