@@ -24,7 +24,11 @@ export const signup = (data) => async (dispatch) => {
       window.location.href = "/verify/" + res.data.data.email;
     }
   } catch (error) {
-    dispatch({ type: FAILURE, payload: error.response.data.err });
+    if (error.response.data.err === "verify") {
+      window.location.href = "/verify/" + data.email;
+    } else {
+      dispatch({ type: FAILURE, payload: error.response.data.err });
+    }
     dispatch({
       type: SIGN_UP_FAILED,
     });
