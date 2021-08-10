@@ -15,17 +15,11 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="nav-list">
-        <Link to="/" className="nav-link">
-          Home
-        </Link>
         <Link
           to={`/profile/${localStorage.getItem("id")}`}
           className="nav-link"
         >
           Profile
-        </Link>
-        <Link to="/settings" className="nav-link">
-          Settings
         </Link>
         <p
           className="nav-link"
@@ -36,12 +30,6 @@ const Navbar = () => {
         >
           Logout
         </p>
-      </div>
-
-      <div className="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
       </div>
     </nav>
   );
