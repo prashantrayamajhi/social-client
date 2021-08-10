@@ -4,6 +4,7 @@ import FemaleImage from "./../../images/female.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
 import { useState } from "react";
 import DeleteModal from "./../Modals/Delete";
@@ -52,8 +53,12 @@ const Post = ({ post, isSinglePost = false }) => {
                   }
                   alt={post.user.name}
                 />
-
-                <p>{post.user.name}</p>
+                <div className="text">
+                  <p>{post.user.name}</p>
+                  <Moment className="time" fromNow>
+                    {post.createdAt}
+                  </Moment>
+                </div>
               </Link>
             </div>
             {post.user._id === userId && (
