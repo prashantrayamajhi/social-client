@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "./../../actions/auth";
+import Loading from "./../Utility/Loading";
 import "./index.scss";
 
 const Signup = () => {
@@ -11,7 +12,8 @@ const Signup = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
+
+  const loading = useSelector((state) => state.auth.loading);
 
   useEffect(() => {
     localStorage.getItem("id") &&
@@ -24,10 +26,8 @@ const Signup = () => {
   const dispatch = useDispatch();
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    setIsDisabled(true);
     const data = { name, email, password, address, gender, username };
     dispatch(signup(data));
-    setIsDisabled(false);
   };
 
   return (
@@ -100,9 +100,13 @@ const Signup = () => {
             <p>By signing up you agree to our terms and conditions</p>
           </div>
           <div className="btn-wrapper">
-            <button type="submit" disabled={isDisabled}>
-              Signup
-            </button>
+            {!loading ? (
+              <button type="submit" disabled={loading}>
+                Signup
+              </button>
+            ) : (
+              <Loading />
+            )}
           </div>
           <p>
             Already have an account ?{" "}

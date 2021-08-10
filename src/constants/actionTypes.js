@@ -1,5 +1,9 @@
 export const SIGNUP = "SIGNUP";
+export const SIGNED_UP = "SIGNED_UP";
+export const SIGN_UP_FAILED = "SIGN_UP_FAILED";
 export const LOGIN = "LOGIN";
+export const LOGGED_IN = "LOGGED_IN";
+export const LOG_IN_FAILED = "LOG_IN_FAILED";
 export const LOGOUT = "LOGOUT";
 export const VERIFY = "VERIFY";
 

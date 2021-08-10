@@ -1,7 +1,19 @@
 import Axios from "./../api/server";
-import { LOGIN, LOGOUT, FAILURE, SUCCESS } from "./../constants/actionTypes";
+import {
+  LOGIN,
+  LOGOUT,
+  FAILURE,
+  SUCCESS,
+  LOGGED_IN,
+  LOG_IN_FAILED,
+  SIGNUP,
+  SIGN_UP_FAILED,
+} from "./../constants/actionTypes";
 
 export const signup = (data) => async (dispatch) => {
+  dispatch({
+    type: SIGNUP,
+  });
   try {
     const res = await Axios.post("/api/v1/auth/signup", data);
     if (res.status === 201) {
@@ -13,15 +25,21 @@ export const signup = (data) => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: FAILURE, payload: error.response.data.err });
+    dispatch({
+      type: SIGN_UP_FAILED,
+    });
   }
 };
 
 export const login = (data) => async (dispatch) => {
   try {
+    dispatch({
+      type: LOGIN,
+    });
     const res = await Axios.post("/api/v1/auth/login", data);
     if (res.status === 200) {
       dispatch({
-        type: LOGIN,
+        type: LOGGED_IN,
         payload: res.data.data,
       });
     }
@@ -31,6 +49,7 @@ export const login = (data) => async (dispatch) => {
       window.location.href = "/verify/" + data.email;
     }
     dispatch({ type: FAILURE, payload: error.response.data.err });
+    dispatch({ type: LOG_IN_FAILED });
   }
 };
 

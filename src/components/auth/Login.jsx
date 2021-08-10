@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "./../../actions/auth";
 import "./index.scss";
 import Loading from "./../Utility/Loading";
@@ -8,9 +8,10 @@ import Loading from "./../Utility/Loading";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
 
   const dispatch = useDispatch();
+
+  const loading = useSelector((state) => state.auth.loading);
 
   useEffect(() => {
     localStorage.getItem("id") &&
@@ -21,17 +22,14 @@ const Login = () => {
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    setIsDisabled(true);
     try {
       const data = { email, password };
       dispatch(login(data));
-      setIsDisabled(false);
     } catch (err) {
       if (err.response.data.type === "not-verified") {
         window.location.href = "/auth/user/verify/" + email;
       }
       console.log(err);
-      setIsDisabled(false);
       setEmail("");
       setPassword("");
     }
@@ -64,10 +62,13 @@ const Login = () => {
             />
           </div>
           <div className="btn-wrapper">
-            <button type="submit" disabled={isDisabled}>
-              Login
-            </button>
-            {/* <Loading /> */}
+            {loading ? (
+              <Loading />
+            ) : (
+              <button type="submit" disabled={loading}>
+                Login
+              </button>
+            )}
           </div>
           <p>
             Dont have an account ?{" "}
