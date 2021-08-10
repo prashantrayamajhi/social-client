@@ -49,7 +49,7 @@ export const login = (data) => async (dispatch) => {
     }
     window.location.href = "/";
   } catch (error) {
-    if (error.response.data.err === "Please verify you account through mail") {
+    if (error.response.data.err === "Please verify your account through mail") {
       window.location.href = "/verify/" + data.email;
     }
     dispatch({ type: FAILURE, payload: error.response.data.err });
