@@ -4,6 +4,7 @@ import { getPosts, createPost } from "./../../actions/posts";
 import Post from "./../Post/Post";
 import Navbar from "./../Navbar/Navbar";
 import config from "./../../helpers/config";
+import Loading from "./../Utility/Loading";
 import "./index.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +15,9 @@ const Home = () => {
   const [image, setImage] = useState(null);
   const [displayImage, setDisplayImage] = useState(null);
 
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.posts);
+  const loading = useSelector((state) => state.posts.loading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,9 +30,11 @@ const Home = () => {
     formData.append("title", title);
     formData.append("image", image);
     dispatch(createPost(formData, config));
-    setTitle("");
-    setImage(null);
-    setDisplayImage(null);
+    if (!loading) {
+      setTitle("");
+      setImage(null);
+      setDisplayImage(null);
+    }
   };
 
   return (
@@ -71,7 +76,13 @@ const Home = () => {
                 />
               )}
               <br />
-              <button type="submit">Post</button>
+              {loading ? (
+                <Loading />
+              ) : (
+                <button type="submit" disabled={loading}>
+                  Post
+                </button>
+              )}
             </form>
           </div>
           {posts.length > 0 ? (
@@ -79,7 +90,7 @@ const Home = () => {
               return <Post key={index} post={post} />;
             })
           ) : (
-            <p className="loading">Loading...</p>
+            <p className="loading"></p>
           )}
         </div>
       </div>

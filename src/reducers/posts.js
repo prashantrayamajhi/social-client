@@ -5,34 +5,49 @@ import {
   GET_POST_BY_USER_ID,
   LIKE_POST,
   DELETE_POST,
-  // CREATE_COMMENT,
-  // DELETE_COMMENT,
-  // UPDATE_COMMENT,
+  POST_CREATED,
+  FAILED_POST_CREATE,
 } from "./../constants/actionTypes";
 
-const reducers = (posts = [], action) => {
+const initialState = { posts: [], loading: false };
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ALL:
-      return action.payload.posts;
+      return { ...state, posts: action.payload.posts };
 
     case GET_POST_BY_USER_ID:
-      return action.payload;
+      return { ...state, posts: [action.payload] };
 
     case CREATE_POST:
-      return [action.payload, ...posts];
+      return { ...state, loading: true };
+
+    case FAILED_POST_CREATE:
+      return { ...state, loading: false };
+
+    case POST_CREATED:
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts],
+        loading: false,
+      };
 
     case UPDATE_POST:
     case LIKE_POST:
-      // case CREATE_COMMENT:
-      return posts.map((post) =>
-        post._id === action.payload._id ? action.payload : post
-      );
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        ),
+      };
 
     case DELETE_POST:
-      return posts.filter((post) => post._id !== action.payload);
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      };
 
     default:
-      return posts;
+      return state;
   }
 };
 

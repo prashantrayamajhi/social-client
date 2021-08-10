@@ -8,6 +8,8 @@ import {
   LIKE_POST,
   LIKE_SINGLE_POST,
   DELETE_POST,
+  POST_CREATED,
+  FAILED_POST_CREATE,
 } from "./../constants/actionTypes";
 import config from "./../helpers/config";
 
@@ -30,13 +32,21 @@ export const getPostsByUserId = (id) => async (dispatch) => {
 };
 
 export const createPost = (data) => async (dispatch) => {
+  dispatch({
+    type: CREATE_POST,
+  });
   try {
     const res = await Axios.post("/api/v1/posts", data, config);
-    dispatch({ type: CREATE_POST, payload: res.data.data });
+    if (res.status === 201) {
+      dispatch({ type: POST_CREATED, payload: res.data.data });
+    }
   } catch (error) {
     dispatch({
       type: FAILURE,
       payload: error.response.data.error,
+    });
+    dispatch({
+      type: FAILED_POST_CREATE,
     });
   }
 };
