@@ -33,12 +33,18 @@
       font-size: 1.3rem;
       display: flex;
       align-items: center;
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
     }
     .info {
       margin-top: 0.8rem;
       .icon {
         margin-right: 0.8rem;
         width: 1rem;
+        @media (max-width: 768px) {
+          font-size: 1.1rem;
+        }
       }
     }
     .info.social {
