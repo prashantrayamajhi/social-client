@@ -16,9 +16,11 @@ const reducer = (state = initialState, action) => {
     case DELETE_COMMENT:
       return { post: action.payload, loading: false };
     case LIKE_SINGLE_POST:
-      return state.post._id === action.payload._id
-        ? action.payload
-        : state.post;
+      console.log(state.post._id, action.payload._id);
+      return {
+        post:
+          state.post._id === action.payload._id ? action.payload : state.post,
+      };
     default:
       return state;
   }

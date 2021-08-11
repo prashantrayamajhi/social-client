@@ -41,6 +41,8 @@ const PostDetails = () => {
     setText("");
   };
 
+  console.log(post);
+
   return (
     <>
       {deleteModal && (
@@ -53,7 +55,9 @@ const PostDetails = () => {
       )}
       <Navbar />
       {loading ? (
-        <Loading />
+        <div className="container">
+          <Loading />
+        </div>
       ) : (
         post && (
           <div className="container">
