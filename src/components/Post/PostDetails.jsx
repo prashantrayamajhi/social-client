@@ -41,8 +41,6 @@ const PostDetails = () => {
     setText("");
   };
 
-  console.log(post);
-
   return (
     <>
       {deleteModal && (
